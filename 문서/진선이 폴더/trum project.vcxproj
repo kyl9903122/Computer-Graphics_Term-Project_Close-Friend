@@ -148,8 +148,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="map.cpp" />
+    <ClCompile Include="loadOBJ.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="loadObj.h" />
     <ClInclude Include="shader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
