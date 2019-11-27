@@ -51,10 +51,8 @@ void loadOBJ::load(glm::mat4 projection, glm::mat4 view)
 		(void*)0                          // array buffer offset
 	);
 
-
 	unsigned int projectionLocation = glGetUniformLocation(ourShaderID, "projectionTransform");
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &projection[0][0]);
-
 
 	unsigned int viewLocation = glGetUniformLocation(ourShaderID, "viewTransform");
 	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);

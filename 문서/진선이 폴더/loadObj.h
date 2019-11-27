@@ -9,7 +9,6 @@
 
 class loadOBJ {
 public:
-
 	std::vector< unsigned int > vertexIndices, uvIndices, normalIndices;
 	std::vector< glm::vec3 > temp_vertices;
 	std::vector< glm::vec3 > temp_uvs;
@@ -94,8 +93,9 @@ public:
 			out_uvs.push_back(uv);
 			out_normals.push_back(normal);
 		}
+		fclose(file);
 	}
 };
 
-	
+
 #endif
