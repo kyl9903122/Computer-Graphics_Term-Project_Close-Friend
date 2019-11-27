@@ -1,0 +1,10 @@
+텀프시 주의사항
+
+1. window size : 800 x 600
+2. object size : 50 x 50 x 50
+3. 변수명
+ 1) 기본자료형: int, float, double, char, string - > i,f,d,ch,str을 변수이름 앞에 붙여준다.
+ 2) 클래스 : MyClass          ex) class kyrHERO
+4. 주석처리 최대한 자세히
+5. 변수 한줄에 선언 금지
+6. 함수는 정의부 / 선언부 나눠서 
