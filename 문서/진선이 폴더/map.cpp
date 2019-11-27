@@ -1,15 +1,10 @@
 #include <vector>
-#include <gl/glew.h>
-#include <gl/freeglut.h>
-#include <gl/freeglut_ext.h>
-#include <iostream>
-#include <fstream>
-#include <sstream>
 #include <cstdlib>
 #include <ctime>
-#include <gl/glm/glm.hpp>
-#include <gl/glm/ext.hpp>
-#include <gl/glm/gtc/matrix_transform.hpp>
+
+#include "shader.h"
+#define SCR_WIDTH 800
+#define SCR_HEIGHT 600
 
 
 GLvoid drawScene(GLvoid);
@@ -17,7 +12,7 @@ GLvoid Reshape(int, int);
 GLuint LoadShaders(const char *, const char *);
 void Keyboard(unsigned char, int, int);
 GLvoid TimerFunction(int);
-bool loadOBJ(const char * path, std::vector < glm::vec3 > & out_vertices, std::vector < glm::vec2 > & out_uvs, std::vector < glm::vec3 > & out_normals);
+bool loadOBJ(const char * path, std::vector < glm::vec3 > & out_vertices, std::vector < glm::vec3 > & out_uvs, std::vector < glm::vec3 > & out_normals);
 
 bool timerCheck = false;
 bool culling = true;
@@ -38,7 +33,7 @@ bool loadOBJ(
 
 std::vector< unsigned int > vertexIndices, uvIndices, normalIndices;
 std::vector< glm::vec3 > temp_vertices;
-std::vector< glm::vec2 > temp_uvs;
+std::vector< glm::vec3 > temp_uvs;
 std::vector< glm::vec3 > temp_normals;
 
 struct vertex_data {
@@ -78,12 +73,24 @@ GLvoid drawScene() {
 	// draw	
 	// 생성하고 컴파일하기
 
-	GLuint programID = LoadShaders("vertexshader.glvs", "fragmentshader.glfs");
+	Shader ourShader("vertexshader.glvs", "fragmentshader.glfs"); // you can name your shader files however you like
+
+	ourShader.use();
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	glm::mat4 projection = glm::mat4(1.0f);
 
-	glUseProgram(programID);
+	projection = glm::ortho(-300 * (float)SCR_WIDTH / (float)SCR_HEIGHT, 300 *(float)SCR_WIDTH / (float)SCR_HEIGHT, (float)-400, (float)400, (float)-400, (float)400);
+
+	glm::vec3 cameraPos = glm::vec3(0.0f, 1.0f, 50);
+	glm::vec3 cameraDirection = cameraDirection = glm::vec3(0.0f, 0.0f, 0.0f);
+	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+	glm::mat4 view = glm::mat4(1.0f);
+	view = glm::lookAt(cameraPos, cameraDirection, cameraUp);
 
 	GLuint VertexArrayID;
 
@@ -91,9 +98,9 @@ GLvoid drawScene() {
 	glBindVertexArray(VertexArrayID);
 
 	std::vector< glm::vec3 > vertices;
-	std::vector< glm::vec2 > uvs;
+	std::vector< glm::vec3 > uvs;
 	std::vector< glm::vec3 > normals; // 지금은 안쓸거에요. 
-	bool res = loadOBJ("D:\\resource\\box.obj", vertices, uvs, normals);
+	bool res = loadOBJ("log.obj", vertices, uvs, normals);
 
 
 	// 이것이 우리의 버텍스 버퍼를 가리킵니다.
@@ -126,7 +133,7 @@ GLvoid drawScene() {
 	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
 	glVertexAttribPointer(
 		1,                                // attribute
-		2,                                // size
+		3,                                // size
 		GL_FLOAT,                         // type
 		GL_FALSE,                         // normalized?
 		0,                                // stride
@@ -142,12 +149,19 @@ GLvoid drawScene() {
 	rotMatrix = glm::rotate(rotMatrix, glm::radians(30.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	rotMatrix = glm::rotate(rotMatrix, glm::radians(angle + -30.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
-	scaleMatrix = glm::scale(scaleMatrix, glm::vec3(0.05, 0.05, 0.05));
+	//scaleMatrix = glm::scale(scaleMatrix, glm::vec3(0.05, 0.05, 0.05));
 
 	myTransformeVector = transMatrix * rotMatrix * scaleMatrix;
 
-	unsigned int transformLocation = glGetUniformLocation(programID, "transform");
+	unsigned int transformLocation = glGetUniformLocation(ourShader.ID, "transform");
 	glUniformMatrix4fv(transformLocation, 1, GL_FALSE, glm::value_ptr(myTransformeVector));
+
+	unsigned int projectionLocation = glGetUniformLocation(ourShader.ID, "projectionTransform");
+	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &projection[0][0]);
+
+
+	unsigned int viewLocation = glGetUniformLocation(ourShader.ID, "viewTransform");
+	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);
 
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -206,99 +220,7 @@ GLvoid TimerFunction(int value)
 }
 
 
-GLuint LoadShaders(const char * vertex_file_path, const char * fragment_file_path) {
-
-	// 쉐이더들 생성
-	GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
-	GLuint FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
-
-	// 버텍스 쉐이더 코드를 파일에서 읽기
-	std::string VertexShaderCode;
-	std::ifstream VertexShaderStream(vertex_file_path, std::ios::in);
-	if (VertexShaderStream.is_open()) {
-		std::stringstream sstr;
-		sstr << VertexShaderStream.rdbuf();
-		VertexShaderCode = sstr.str();
-		VertexShaderStream.close();
-	}
-	else {
-		printf("파일 %s 를 읽을 수 없음. 정확한 디렉토리를 사용 중입니까 ? FAQ 를 우선 읽어보는 걸 잊지 마세요!\n", vertex_file_path);
-		getchar();
-		return 0;
-	}
-
-	// 프래그먼트 쉐이더 코드를 파일에서 읽기
-	std::string FragmentShaderCode;
-	std::ifstream FragmentShaderStream(fragment_file_path, std::ios::in);
-	if (FragmentShaderStream.is_open()) {
-		std::stringstream sstr;
-		sstr << FragmentShaderStream.rdbuf();
-		FragmentShaderCode = sstr.str();
-		FragmentShaderStream.close();
-	}
-
-	GLint Result = GL_FALSE;
-	int InfoLogLength;
-
-	// 버텍스 쉐이더를 컴파일
-	printf("Compiling shader : %s\n", vertex_file_path);
-	char const * VertexSourcePointer = VertexShaderCode.c_str();
-	glShaderSource(VertexShaderID, 1, &VertexSourcePointer, NULL);
-	glCompileShader(VertexShaderID);
-
-	// 버텍스 쉐이더를 검사
-	glGetShaderiv(VertexShaderID, GL_COMPILE_STATUS, &Result);
-	glGetShaderiv(VertexShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-
-	const char * vertexInfoLog;
-	const char *FragmentShaderErrorMessage;
-	GLchar *ProgramErrorMessage;
-
-	if (InfoLogLength > 0) {
-		vertexInfoLog = "gg";
-		glGetShaderInfoLog(VertexShaderID, InfoLogLength, NULL, (GLchar*)vertexInfoLog);
-		printf("%s\n", vertexInfoLog);
-	}
-
-	// 프래그먼트 쉐이더를 컴파일
-	printf("Compiling shader : %s\n", fragment_file_path);
-	char const * FragmentSourcePointer = FragmentShaderCode.c_str();
-	glShaderSource(FragmentShaderID, 1, &FragmentSourcePointer, NULL);
-	glCompileShader(FragmentShaderID);
-
-	// 프래그먼트 쉐이더를 검사
-	glGetShaderiv(FragmentShaderID, GL_COMPILE_STATUS, &Result);
-	glGetShaderiv(FragmentShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-
-	if (InfoLogLength > 0) {
-		FragmentShaderErrorMessage = "gg";
-		glGetShaderInfoLog(FragmentShaderID, InfoLogLength, NULL, (GLchar*)FragmentShaderErrorMessage);
-		printf("%s\n", vertexInfoLog);
-	}
-
-	// 프로그램에 링크
-	printf("Linking program\n");
-	GLuint ProgramID = glCreateProgram();
-	glAttachShader(ProgramID, VertexShaderID);
-	glAttachShader(ProgramID, FragmentShaderID);
-	glLinkProgram(ProgramID);
-
-	// 프로그램 검사
-	glGetProgramiv(ProgramID, GL_LINK_STATUS, &Result);
-	glGetProgramiv(ProgramID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-	if (InfoLogLength > 0) {
-		glGetProgramInfoLog(ProgramID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
-		printf("%s\n", &ProgramErrorMessage[0]);
-	}
-
-	glDetachShader(ProgramID, VertexShaderID);
-	glDetachShader(ProgramID, FragmentShaderID);
-
-	return ProgramID;
-}
-
-
-bool loadOBJ(const char * path, std::vector < glm::vec3 > & out_vertices, std::vector < glm::vec2 > & out_uvs, 
+bool loadOBJ(const char * path, std::vector < glm::vec3 > & out_vertices, std::vector < glm::vec3 > & out_uvs, 
 	std::vector < glm::vec3 > & out_normals)
 {
 	FILE * file;
@@ -328,8 +250,8 @@ bool loadOBJ(const char * path, std::vector < glm::vec3 > & out_vertices, std::v
 			temp_normals.push_back(normal);
 		}
 		else if (strcmp(lineHeader, "vt") == 0) {
-			glm::vec2 uv;
-			fscanf_s(file, "%f %f\n", &uv.x, &uv.y);
+			glm::vec3 uv;
+			fscanf_s(file, "%f %f %f\n", &uv.x, &uv.y, &uv.z);
 			temp_uvs.push_back(uv);
 		}
 		else if (strcmp(lineHeader, "f") == 0) {
@@ -358,8 +280,7 @@ bool loadOBJ(const char * path, std::vector < glm::vec3 > & out_vertices, std::v
 		unsigned int normalIndex = normalIndices[i];
 
 		glm::vec3 vertex = temp_vertices[vertexIndex - 1];
-		glm::vec2 uv = temp_uvs[uvIndex - 1];
-		uv.y = 1 - uv.y;
+		glm::vec3 uv = temp_uvs[uvIndex - 1];
 		glm::vec3 normal = temp_normals[normalIndex - 1];
 
 		out_vertices.push_back(vertex);
