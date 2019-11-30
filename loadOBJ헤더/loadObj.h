@@ -94,7 +94,9 @@ public:
 			out_uvs.push_back(uv);
 			out_normals.push_back(normal);
 		}
+		fclose(file);
 	}
+	
 };
 
 	
