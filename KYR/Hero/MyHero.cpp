@@ -108,11 +108,26 @@ void kyrHero::draw(glm::mat4 projection, glm::mat4 view) {
 }
 
 bool kyrHero::check_death(MyPos obs_pos,int obs_tag) {
-	if (check_collision(obs_pos)) {
 		// case 1. collision with obstacles
 		if (obs_tag == 1) {
 			// obstacle is log
-
+			if (check_collision(obs_pos)) {
+				// hero is on the log
+				current_pos.y = obs_pos.y + 25+size/2;
+				moving = false;
+				jumping_velocity = 30.0f;
+				return false;
+			}
+			else {
+				// hero fall into the river
+				std::cout << "fall into the river" << std::endl;
+				return true;
+			}
 		}
-	}
+		else {
+			if (check_collision(obs_pos))
+				return true;
+			else
+				return false;
+		}
 }

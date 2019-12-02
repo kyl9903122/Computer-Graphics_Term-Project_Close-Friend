@@ -20,5 +20,6 @@ public:
 	bool check_collision(MyPos obs_pos);
 	void move();
 	void draw(glm::mat4 projection,glm::mat4 view);
+	bool check_death(MyPos obs_pos,int obs_tag);
 };
 

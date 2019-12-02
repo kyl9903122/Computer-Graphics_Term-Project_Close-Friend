@@ -5,7 +5,7 @@
 kyrHero hero;
 
 //test_cube_pos
-MyPos test_cube_pos{ -10,-10,-10 };
+MyPos test_cube_pos{ -10,-30,-10 };
 
 //function
 void Display();
@@ -45,7 +45,7 @@ void Display() {
 	projection = glm::ortho(-300 * (float)SCR_WIDTH / (float)SCR_HEIGHT, 300 * (float)SCR_WIDTH / (float)SCR_HEIGHT, (float)-400, (float)400, (float)-400, (float)400);
 
 	glm::mat4 view = glm::mat4(1.0f);
-	view = glm::lookAt(glm::vec3(0.0f, 0.0f, 50.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	view = glm::lookAt(glm::vec3(0.0f, 45.0f, 50.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	testcube_shader(projection, view);
 	hero.draw(projection,view);
 
@@ -55,7 +55,7 @@ void Display() {
 void Timer(int val) {
 	glutPostRedisplay();
 	hero.move();
-	if (hero.check_collision(test_cube_pos)) {
+	if (hero.check_death(test_cube_pos,1)) {
 		//test 
 		std::cout << "die!" << std::endl;
 	}
