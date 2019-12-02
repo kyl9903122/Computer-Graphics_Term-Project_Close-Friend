@@ -51,8 +51,26 @@ void loadOBJ::load(glm::mat4 projection, glm::mat4 view)
 		(void*)0                          // array buffer offset
 	);
 
+
+	GLuint lightbuffer;
+	glGenBuffers(1, &lightbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, lightbuffer);
+	glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(glm::vec3), &normals[0], GL_STATIC_DRAW);
+
+	glEnableVertexAttribArray(2);
+	glBindBuffer(GL_ARRAY_BUFFER, lightbuffer);
+	glVertexAttribPointer(
+		2,                                // attribute
+		3,                                // size
+		GL_FLOAT,                         // type
+		GL_FALSE,                         // normalized?
+		0,                                // stride
+		(void*)0                          // array buffer offset
+	);
+
 	unsigned int projectionLocation = glGetUniformLocation(ourShaderID, "projectionTransform");
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &projection[0][0]);
+
 
 	unsigned int viewLocation = glGetUniformLocation(ourShaderID, "viewTransform");
 	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);

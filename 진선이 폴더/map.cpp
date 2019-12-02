@@ -1,10 +1,14 @@
 #include "shader.h"
 #include "loadObj.h"
+#include "MyRoad.h"
+#include "MyTruck.h"
+#include "MyRiver.h"
+#include "MyLog.h"
 
 #define SCR_WIDTH 800
 #define SCR_HEIGHT 600
 
-glm::mat4 projection = glm::ortho(-300 * (float)SCR_WIDTH / (float)SCR_HEIGHT, 300 * (float)SCR_WIDTH / (float)SCR_HEIGHT, (float)-400, (float)400, (float)-400, (float)400);
+glm::mat4 projection = glm::ortho(-300 * (float)SCR_WIDTH / (float)SCR_HEIGHT, 300 * (float)SCR_WIDTH / (float)SCR_HEIGHT, (float)-400, (float)400, (float)-600, (float)600);
 
 glm::vec3 cameraPos = glm::vec3(0.0f, 45.0f, 50);
 glm::vec3 cameraDirection = cameraDirection = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -16,58 +20,20 @@ GLvoid drawScene(GLvoid);
 GLvoid Reshape(int, int);
 GLvoid TimerFunction(int);
 
+// let's make only 1
+MyState** states = new MyState*[12];
+
 bool timerCheck = false;
 
 float angle = 0;
 float Xpos = -400;
 
-struct vertex_data {
-	float x;
-	float y;
-	float z;
-};
-
-
-class jjsTruck {
-public:
-	loadOBJ* truck;
-
-	jjsTruck(unsigned int ID) {
-		truck = new loadOBJ("truck.obj", ID);
-	}
-
-	void move(glm::mat4 myTransformeVector)
-	{
-		truck->load(projection, view);
-		truck->setTransform(myTransformeVector);
-		truck->draw();
-	}
-};
-
-
-class Road {
-public:
-	jjsTruck* truck_tmp;
-	loadOBJ* road;
-
-	Road(unsigned int ID) {
-		truck_tmp = new jjsTruck(ID);
-		road = new loadOBJ("road.obj",ID);
-	}
-
-	void draw(glm::mat4 transTruck, glm::mat4 transRoad) {
-		truck_tmp->move(transTruck);
-		road->load(projection, view);
-		road->setTransform(transRoad);
-		road->draw();
-	}
-};
-
+void init_map();
 
 int main(int argc, char** argv)
 {
 	srand((unsigned int)time(NULL));
-
+	init_map();
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition(100, 100);
@@ -84,6 +50,8 @@ int main(int argc, char** argv)
 		std::cout << "GLEW Initialized" << std::endl;
 
 	//좌표축
+	for (int i = 0; i < 12; i++)
+		states[i]->pos.z = i * -50;
 
 	glutDisplayFunc(drawScene);
 	glutTimerFunc(10, TimerFunction, 1);
@@ -94,6 +62,7 @@ int main(int argc, char** argv)
 
 GLvoid drawScene() 
 {
+	std::cout << "draw" << std::endl;
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -101,32 +70,8 @@ GLvoid drawScene()
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 
-
-	glm::mat4 rotMatrix = glm::mat4(1.0f); // 단위행렬로초기화 
-	glm::mat4 transMatrix = glm::mat4(1.0f);
-	glm::mat4 scaleMatrix = glm::mat4(1.0f);
-
-
-	glm::mat4 myTranstruck = glm::mat4(1.0f);
-	glm::mat4 myTransroad = glm::mat4(1.0f);
-	glm::mat4 mytransTruckMatrix = glm::mat4(1.0f);
-	glm::mat4 myrotTruckMatrix = glm::mat4(1.0f);
-
-	
-	myTranstruck = rotMatrix * transMatrix *  scaleMatrix;
-	myTransroad = transMatrix;
-
-	Shader ourShader("vertexshader.glvs", "fragmentshader.glfs"); // you can name your shader files however you like
-	ourShader.use();
-
-	mytransTruckMatrix = glm::translate(mytransTruckMatrix, glm::vec3(0.0, 0.0, Xpos));
-	myrotTruckMatrix = glm::rotate(myrotTruckMatrix, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-
-	myTranstruck = myrotTruckMatrix * mytransTruckMatrix *  scaleMatrix;
-	myTransroad = transMatrix;
-
-	Road tmp1(ourShader.ID);
-	tmp1.draw(myTranstruck, myTransroad);
+	for (int i = 0; i < 12; i++)
+		states[i]->draw(projection, view);
 
 	glutSwapBuffers();
 }
@@ -138,7 +83,35 @@ GLvoid Reshape(int w, int h) {
 
 GLvoid TimerFunction(int value)
 {
-	Xpos += 10;
+	// change this code into using 'for'
+	for (int i = 0; i < 12; i++) {
+		states[i]->move();
+		states[i]->pos.z += 5;
+		if (states[i]->check_removing()) {
+			delete states[i];
+			states[i] = new MyRoad;
+			states[i]->pos.z = -375;
+		}
+	}
+	
 	glutTimerFunc(10, TimerFunction, 1);
 	glutPostRedisplay();
+}
+
+void init_map() {
+	//create states
+	//lets make only 1
+	states[0] = new MyRoad;
+	states[1] = new MyRoad;
+	states[2] = new MyRiver;
+	states[3] = new MyRiver;
+	states[4] = new MyRiver;
+	states[5] = new MyRoad;
+	states[6] = new MyRoad;
+	states[7] = new MyRoad;
+	states[7] = new MyRiver;
+	states[8] = new MyRiver;
+	states[9] = new MyRoad;
+	states[10] = new MyRoad;
+	states[11] = new MyRoad;
 }
