@@ -1,14 +1,14 @@
 #pragma once
 #include "loadObj.h"
 #include "MyHeader.h"
-class MyHero
+class kyrHero
 {
 private:
 	// hero's shader_path
 	const char* vertexshader_path = "hero_vertexshader.glvs";
 	const char* fragmentshader_path = "hero_fragmentshader.glfs";
 	const char* obj_path = "cube2.obj";
-	MyPos current_pos{ 0.0f,0.0f,0.0f };
+	MyPos current_pos{ 0.0f,0.0f,400.0f };
 	float direction_angle = 0.0f;
 	MyBoundingBox bounding_box{ size / 2,size / 2,size / 2,-size / 2,-size / 2,-size / 2 };
 	float size = 40.0f;
