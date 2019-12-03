@@ -4,9 +4,9 @@
 // variables
 kyrHero hero;
 
+
 //test_cube_pos
 MyPos test_cube_pos{ -10,-30,-10 };
-
 //function
 void Display();
 void Timer(int);
@@ -54,11 +54,7 @@ void Display() {
 
 void Timer(int val) {
 	glutPostRedisplay();
-	hero.move();
-	if (hero.check_death(test_cube_pos,1)) {
-		//test 
-		std::cout << "die!" << std::endl;
-	}
+	hero.update(test_cube_pos);
 	if (val == 0) {
 		return;
 	}

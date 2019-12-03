@@ -1,7 +1,7 @@
 #include "MyHero.h"
 
 void kyrHero::keyboard(unsigned char key, int x, int y) {
-	if (!moving) {
+	if (!moving && !soul_moving) {
 		switch (key) {
 		case 'w':
 		case 'W':
@@ -28,7 +28,7 @@ void kyrHero::keyboard(unsigned char key, int x, int y) {
 void kyrHero::move() {
 	// hero will move to its direction and jump
 	// hero move to its direction
-	if (moving) {
+	if (moving && !soul_moving) {
 		switch ((int)direction_angle) {
 		case 0:
 			// directon == front
@@ -91,10 +91,10 @@ bool kyrHero::check_collision(MyPos obs_pos) {
 }
 
 void kyrHero::draw(glm::mat4 projection, glm::mat4 view) {
-	Shader shader(vertexshader_path, fragmentshader_path);
-	loadOBJ obj(obj_path, shader.ID);
+	Shader shader("hero_vertexshader.glvs", "hero_fragmentshader.glfs");
+	loadOBJ obj("cube2.obj", shader.ID);
 	shader.use();
-	obj.load(projection,view);
+	obj.load(projection, view);
 	// init model_matrix
 	glm::mat4 model = glm::mat4(1.0f);
 	model = glm::translate(model, glm::vec3(current_pos.x, current_pos.y, current_pos.z));
@@ -105,6 +105,8 @@ void kyrHero::draw(glm::mat4 projection, glm::mat4 view) {
 
 	// draw obj
 	obj.draw();
+	soul_draw(projection,view);
+
 }
 
 bool kyrHero::check_death(MyPos obs_pos,int obs_tag) {
@@ -114,20 +116,60 @@ bool kyrHero::check_death(MyPos obs_pos,int obs_tag) {
 			if (check_collision(obs_pos)) {
 				// hero is on the log
 				current_pos.y = obs_pos.y + 25+size/2;
+				// hero has to stop jumping
 				moving = false;
 				jumping_velocity = 30.0f;
 				return false;
 			}
 			else {
-				// hero fall into the river
+				// hero falls into the river
 				std::cout << "fall into the river" << std::endl;
+				current_pos.y -= 5;
+				moving = false;
+				if (current_pos.y < 100) {
+					soul_moving = true;
+				}
 				return true;
 			}
 		}
 		else {
-			if (check_collision(obs_pos))
+			if (check_collision(obs_pos)) {
+				moving = false;
+				soul_moving = true;
 				return true;
+			}
 			else
 				return false;
 		}
+}
+
+void kyrHero::update(/*obs_class*/MyPos test_cube_pos) {
+	move();
+	// this part will change to for()
+	if (check_death(test_cube_pos, 0)) {
+		//test 
+		std::cout << "die!" << std::endl;
+	}
+	soul_move();
+}
+
+void kyrHero::soul_move() {
+	if (soul_moving) {
+		soul_pos.y += 5;
+		soul_pos.x = 20*sin(glm::radians(soul_pos.y));
+	}
+}
+
+void kyrHero::soul_draw(glm::mat4 projection, glm::mat4 view) {
+	if (soul_moving){
+		Shader shader("soul_vertexshader.glvs", "soul_fragmentshader.glfs");
+		loadOBJ soul_obj("soul_cube.obj", shader.ID);
+		soul_obj.load(projection, view);
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.8f, 0.8f, 0.8f));
+		model = glm::translate(model, glm::vec3(soul_pos.x+current_pos.x, soul_pos.y+current_pos.y, current_pos.z));
+
+		soul_obj.setTransform(model);
+		soul_obj.draw();
+	}
 }
