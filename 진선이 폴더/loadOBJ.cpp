@@ -8,12 +8,8 @@ void loadOBJ::load(glm::mat4 projection, glm::mat4 view)
 
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
-
-	std::vector< glm::vec3 > vertices;
-	std::vector< glm::vec3 > uvs;
-	std::vector< glm::vec3 > normals; // 지금은 안쓸거에요. 
-
-	madeOBJ(objPath, vertices, uvs, normals);
+	
+	//madeOBJ(objPath, vertices, uvs, normals);
 
 	// 이것이 우리의 버텍스 버퍼를 가리킵니다.
 	GLuint vertexbuffer;
@@ -79,6 +75,16 @@ void loadOBJ::load(glm::mat4 projection, glm::mat4 view)
 
 void loadOBJ::setTransform(glm::mat4 Transforme)
 {
+
+	int lightPosLocation = glGetUniformLocation(ourShaderID, "lightPos"); //--- lightPos 값전달 
+	glUniform3f (lightPosLocation, 0, 800, 2000);
+
+	int lightColorLocation = glGetUniformLocation(ourShaderID, "lightColor"); //--- lightColor값전달 
+	glUniform3f (lightColorLocation, 1.0, 1.0, 0.9);
+
+	int lightViewLocation = glGetUniformLocation(ourShaderID, "viewPos");
+	glUniform3f(lightViewLocation, 0.0, 45.0, 50);
+
 	unsigned int transformLocation = glGetUniformLocation(ourShaderID, "transform");
 	glUniformMatrix4fv(transformLocation, 1, GL_FALSE, glm::value_ptr(Transforme));
 }

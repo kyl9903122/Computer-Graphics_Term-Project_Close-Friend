@@ -1,14 +1,14 @@
-#include "MyRiver.h"
+#include "MyCommon.h"
 
-MyRiver::MyRiver() {
+MyCommon::MyCommon() {
 	std::cout << "creating River..." << std::endl;
 	// init pos
-	// only its z_pos will change in MyRiver()
+	// only its z_pos will change in MyCommon()
 	pos = { 0.0f,0.0f,0.0f };
 
-	// init logs
+	// init trees
 	for (int i = 0; i < 3; ++i) {
-		CreateLog(i);
+		CreateTree(i);
 	}
 	// let's once make only 1 truck
 
@@ -20,7 +20,7 @@ MyRiver::MyRiver() {
 	std::cout << "complete creating River!" << std::endl;
 }
 
-void MyRiver::draw(glm::mat4 projection, glm::mat4 view, Shader shader) {
+void MyCommon::draw(glm::mat4 projection, glm::mat4 view, Shader shader) {
 	loadOBJ obj(obj_path, shader.ID);
 	shader.use();
 	obj.load(projection, view);
@@ -34,44 +34,33 @@ void MyRiver::draw(glm::mat4 projection, glm::mat4 view, Shader shader) {
 
 	obj.draw();
 	for (int i = 0; i < 3; i++)
-		logs[i]->draw(projection, view, model, shader);
+		trees[i]->draw(projection, view, model, shader);
 }
 
-void MyRiver::move() {
-	// make logs move
-	for (int i = 0; i < 3; ++i) {
-		logs[i]->move(pos);
-		if (logs[i]->check_removing())
-			remove_log(i);
-	}
-
+void MyCommon::move() {
+	// make trees move
 	// make road move
 	if (moving) {
 
 	}
 }
 
-bool MyRiver::check_removing() {
+bool MyCommon::check_removing() {
 
 	// check its position_y.
 	// if it out off the screen, request removing to state_class
 	if (pos.z > 600) {
 		for (int i = 0; i < 3; ++i)
-			remove_log(i);
+			remove_tree(i);
 		return true;
 	}
 	return false;
 }
 
-void MyRiver::CreateLog(int idx) {
-	logs[idx] = new MyLog(pos);
+void MyCommon::CreateTree(int idx) {
+	trees[idx] = new MyTree(pos);
 }
 
-void MyRiver::remove_log(int i) {
-	// 1. delete
-	delete logs[i];
-
-	// 2. create
-	if (pos.z <= 600)
-		logs[i] = new MyLog(pos);
+void MyCommon::remove_tree(int i) {
+	delete trees[i];
 }
