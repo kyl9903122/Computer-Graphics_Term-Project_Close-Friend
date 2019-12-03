@@ -4,13 +4,11 @@
 class MyRoad : public MyState
 {
 private:
-	MyTruck* trucks[3];
-	const char* vertexshader_path = "vertexshader.glvs";
-	const char* fragment_path = "fragmentshader.glfs";
+	MyTruck* trucks[2];
 	const char* obj_path = "road.obj";
 public:
 	MyRoad();
-	void draw(glm::mat4 projection, glm::mat4 view);
+	void draw(glm::mat4 projection, glm::mat4 view, Shader shader);
 	void move();
 	bool check_removing();
 	void CreateTruck(int idx);

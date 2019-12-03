@@ -9,12 +9,12 @@ protected:
 	bool moving;
 	// map move each frame, per this degree
 	float moving_degree;
-	
+
 public:
 	// current state's position
 	MyPos pos;
 	MyState() {}
-	virtual void draw(glm::mat4 projection, glm::mat4 view) = 0;
+	virtual void draw(glm::mat4 projection, glm::mat4 view, Shader shader) = 0;
 	virtual void move() = 0;
 	virtual	bool check_removing() = 0;
 };

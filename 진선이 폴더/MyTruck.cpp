@@ -33,7 +33,8 @@ void MyTruck::move(MyPos road_pos) {
 
 bool MyTruck::check_removing() {
 	// request removing to road class
-	if (pos.x > 400)
+	if (pos.x > 400 && pos.z <= 600)
 		return true;
+
 	return false;
 }
