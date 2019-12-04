@@ -75,3 +75,5 @@ void MyRiver::remove_log(int i) {
 	if (pos.z <= 600)
 		logs[i] = new MyLog(pos);
 }
+
+MyRiver::~MyRiver() {};

@@ -46,7 +46,6 @@ MyRoad::MyRoad() {
 			 remove_truck(i);
 	 }
 	 if (moving) {
-
 	 }
  }
 
@@ -76,3 +75,5 @@ MyRoad::MyRoad() {
 		 std::cout <<"»ý¼º: "<< pos.z << std::endl;
 	}
  }
+
+ MyRoad::~MyRoad() {};

@@ -6,7 +6,10 @@ MyTruck::MyTruck(MyPos road_pos) {
 	speed = rand() % 20 + 5;
 	size = 50.0f; 
 	direction = 1;
-
+	if (speed < 10)
+		obj_path = "truck.obj";
+	else
+		obj_path = "car.obj";
 }
 
 void MyTruck::draw(glm::mat4 projection, glm::mat4 view, glm::mat4 model, Shader shader) {
@@ -33,8 +36,10 @@ void MyTruck::move(MyPos road_pos) {
 
 bool MyTruck::check_removing() {
 	// request removing to road class
-	if (pos.x > 400 && pos.z <= 600)
+	if (pos.x > 450 && pos.z <= 600)
 		return true;
 
 	return false;
 }
+
+MyTruck::~MyTruck() {};

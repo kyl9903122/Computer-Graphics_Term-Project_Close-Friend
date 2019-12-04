@@ -14,5 +14,6 @@ public:
 	bool check_removing();
 	void CreateTree(int idx);
 	void remove_tree(int i);
+	~MyCommon();
 };
 

@@ -12,7 +12,6 @@ void loadOBJ::load(glm::mat4 projection, glm::mat4 view)
 	//madeOBJ(objPath, vertices, uvs, normals);
 
 	// 이것이 우리의 버텍스 버퍼를 가리킵니다.
-	GLuint vertexbuffer;
 	// 버퍼를 하나 생성합니다. vertexbuffer 에 결과 식별자를 넣습니다
 	glGenBuffers(1, &vertexbuffer);
 	// 아래의 명령어들은 우리의 "vertexbuffer" 버퍼에 대해서 다룰겁니다
@@ -31,7 +30,6 @@ void loadOBJ::load(glm::mat4 projection, glm::mat4 view)
 		(void*)0            // 배열 버퍼의 오프셋(offset; 옮기는 값)
 	);
 
-	GLuint colorbuffer;
 	glGenBuffers(1, &colorbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
 	glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec3), &uvs[0], GL_STATIC_DRAW);
@@ -47,8 +45,6 @@ void loadOBJ::load(glm::mat4 projection, glm::mat4 view)
 		(void*)0                          // array buffer offset
 	);
 
-
-	GLuint lightbuffer;
 	glGenBuffers(1, &lightbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, lightbuffer);
 	glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(glm::vec3), &normals[0], GL_STATIC_DRAW);
@@ -97,4 +93,8 @@ void loadOBJ::draw()
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
+
+	glDeleteBuffers(1, &lightbuffer);
+	glDeleteBuffers(1, &vertexbuffer);
+	glDeleteBuffers(1, &colorbuffer);
 }

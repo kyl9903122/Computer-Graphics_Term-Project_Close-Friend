@@ -13,5 +13,6 @@ public:
 	bool check_removing();
 	void CreateLog(int idx);
 	void remove_log(int i);
+	~MyRiver();
 };
 

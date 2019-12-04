@@ -14,4 +14,5 @@ public:
 	bool check_removing();
 	void CreateTrain(int idx);
 	void remove_train(int i);
+	~MyTrail();
 };

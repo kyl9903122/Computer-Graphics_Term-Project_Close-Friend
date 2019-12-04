@@ -23,7 +23,7 @@ GLvoid drawScene(GLvoid);
 GLvoid Reshape(int, int);
 GLvoid TimerFunction(int);
 
-int map_count = 20;
+int map_count = 23;
 MyState** states = new MyState*[map_count];
 
 bool timerCheck = false;
@@ -93,7 +93,7 @@ GLvoid drawScene()
 				states[i] = new MyCommon;
 				break;
 			}
-			states[i]->pos.z = -395;
+			states[i]->pos.z = -545;
 		}
 	}
 	glutSwapBuffers();

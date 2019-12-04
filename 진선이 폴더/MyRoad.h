@@ -13,5 +13,6 @@ public:
 	bool check_removing();
 	void CreateTruck(int idx);
 	void remove_truck(int i);
+	~MyRoad();
 };
 

@@ -64,3 +64,5 @@ void MyCommon::CreateTree(int idx) {
 void MyCommon::remove_tree(int i) {
 	delete trees[i];
 }
+
+MyCommon::~MyCommon() {};

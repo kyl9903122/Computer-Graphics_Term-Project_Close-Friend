@@ -69,3 +69,5 @@ void MyTrail::remove_train(int i) {
 	if (pos.z <= 600)
 		trains[i] = new MyTrain(pos);
 }
+
+MyTrail::~MyTrail() {};
