@@ -36,6 +36,7 @@ public:
 	int cur_state_obs_cnt;
 	int next_state_obs_cnt;
 	int cur_state_idx = 0;
+	int pass_state_cnt = 0;
 
 
 public:
