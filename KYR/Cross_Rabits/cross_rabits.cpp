@@ -19,7 +19,6 @@ int main(int argc, char** argv)
 	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(900, 700);
 	glutCreateWindow("Floating Window");
-	glClearColor(0.5f, 0.9f, 0.4f, 1.0f);
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK) {
 		std::cerr << "Unable to initialize GLEW" << std::endl;
@@ -47,7 +46,14 @@ GLvoid drawScene()
 	std::cout << "draw" << std::endl;
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	switch (state_mode) {
+	case 0:
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		break;
+	case 1:
+		glClearColor(0.5f, 0.9f, 0.4f, 1.0f);
+		break;
+	}
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
