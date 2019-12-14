@@ -27,9 +27,7 @@ void Title_State::draw_font() {
 	font.load(projection, view);
 	glm::mat4 model = glm::mat4(1.0f);
 	glm::mat4 translation = glm::mat4(1.0f);
-	glm::mat4 scaling = glm::mat4(1.0f);
-	
-	
+	glm::mat4 scaling = glm::mat4(1.0f);	
 
 	// transform
 	translation = glm::translate(translation, glm::vec3(obj_pos.x, obj_pos.y, obj_pos.z));
@@ -38,8 +36,4 @@ void Title_State::draw_font() {
 	font.setTransform(model);
 
 	font.draw();
-}
-
-void Title_State::draw_background() {
-
 }

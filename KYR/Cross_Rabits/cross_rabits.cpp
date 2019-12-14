@@ -2,7 +2,7 @@
 #include "Title_State.h"
 
 Title_State title;
-MainGame_State main_game;
+MainGame_State* main_game = nullptr;
 
 GLvoid drawScene();
 GLvoid Reshape(int w, int h);
@@ -27,8 +27,6 @@ int main(int argc, char** argv)
 	else
 		std::cout << "GLEW Initialized" << std::endl;
 	title.shader = new Shader("font_vertexshader.glvs", "font_fragmentshader.glfs");
-	main_game.shader = new Shader("vertexshader.glvs", "fragmentshader.glfs");
-	main_game.hero_shader = new Shader("hero_vertexshader.glvs", "hero_fragmentshader.glfs");
 
 	glutDisplayFunc(drawScene);
 	glutTimerFunc(10, TimerFunction, 1);
@@ -37,8 +35,8 @@ int main(int argc, char** argv)
 	glutMainLoop();
 
 	delete title.shader;
-	delete main_game.shader;
-	delete main_game.hero_shader;
+	delete main_game->shader;
+	delete main_game->hero_shader;
 }
 
 GLvoid drawScene() 
@@ -63,7 +61,7 @@ GLvoid drawScene()
 		title.Display();
 		break;
 	case 1:
-		main_game.Display();
+		main_game->Display();
 		break;
 	}
 	glutSwapBuffers();
@@ -79,11 +77,15 @@ GLvoid TimerFunction(int value)
 	switch (state_mode) {
 	case 0:
 		title.update();
+		break;
 	case 1:
-		main_game.update();
+		main_game->update();
+		state_mode = main_game->next_state;
+		if (state_mode != 1) {
+			delete main_game;
+		}
 		break;
 	}
-
 	glutTimerFunc(10, TimerFunction, 1);
 	glutPostRedisplay();
 }
@@ -92,10 +94,15 @@ GLvoid keyboard(unsigned char key, int x, int y) {
 	switch (state_mode) {
 	case 0:
 		title.keyboard(key, x, y);
+		state_mode = title.next_state;
+		if (state_mode == 1) {
+			main_game = new MainGame_State;
+			main_game->shader = new Shader("vertexshader.glvs", "fragmentshader.glfs");
+			main_game->hero_shader = new Shader("hero_vertexshader.glvs", "hero_fragmentshader.glfs");
+	}
 		break;
 	case 1:
-		main_game.keyboard(key, x, y);
+		main_game->keyboard(key, x, y);
 		break;
 	}
-	state_mode = title.next_state;
 }
