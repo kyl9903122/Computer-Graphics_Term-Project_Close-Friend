@@ -81,7 +81,3 @@ MyRoad::MyRoad() {
  }
 
  MyRoad::~MyRoad() {};
-
- MyPos MyRoad::get_obs_pos(int idx) {
-	 return trucks[idx]->pos;
- }

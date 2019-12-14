@@ -14,8 +14,6 @@ public:
 	void CreateLog(int idx);
 	void remove_log(int i);
 	~MyRiver();
-	MyPos get_obs_pos(int idx);
 	float get_obs_speed(int idx);
-
 };
 

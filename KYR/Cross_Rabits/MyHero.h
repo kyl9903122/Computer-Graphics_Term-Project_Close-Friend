@@ -23,20 +23,16 @@ public:
 	bool soul_moving = false;
 	bool arrive_at_floor = false;
 	bool on_the_log = false;
-	int log_idx;
 	float log_speed = 0;
+	int* cur_state_idx = nullptr;
 
 public:
-	void keyboard(unsigned char key, int x, int y);
 	bool check_collision(MyPos obs_pos,int obs_tag);
 	void move();
 	bool check_death(MyPos obs_pos, int obs_tag);
-	// framework
 	void update(int tag, MyPos* obs_pos, MyPos* obs_pos2,int obs_cnt1, int obs_cnt2);
 	void draw(glm::mat4 projection, glm::mat4 view, Shader shader);
 	void soul_move();
 	void soul_draw(glm::mat4 projection, glm::mat4 view,Shader shader);
-	void move_on_the_log(float log_speed);
-
 };
 

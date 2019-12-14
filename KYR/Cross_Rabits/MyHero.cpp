@@ -1,9 +1,5 @@
 #include "MyHero.h"
 
-void kyrHero::keyboard(unsigned char key, int x, int y) {
-
-}
-
 void kyrHero::move() {
 	// hero will move to its direction and jump
 	// hero move to its direction
@@ -133,13 +129,15 @@ bool kyrHero::check_death(MyPos obs_pos,int obs_tag) {
 				// hero is on the log
 				// hero has to stop jumping
 				switch (int(direction_angle)) {
+				case 0 :
+					cur_state_idx--;
 				case 90:
 					//move hero to rihgt
-					current_pos.x -= 5;
+					current_pos.x -= 10;
 					break;
 				case -90:
 					// move hero to left
-					current_pos.x += 5;
+					current_pos.x += 10;
 					break;
 				}
 				return false;
@@ -197,8 +195,4 @@ void kyrHero::soul_draw(glm::mat4 projection, glm::mat4 view, Shader shader) {
 		soul_obj.setTransform(model);
 		soul_obj.draw();
 	}
-}
-void kyrHero::move_on_the_log(float log_speed) {
-
-	move();
 }

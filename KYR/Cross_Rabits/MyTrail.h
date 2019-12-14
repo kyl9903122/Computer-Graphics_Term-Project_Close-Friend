@@ -15,6 +15,5 @@ public:
 	void CreateTrain(int idx);
 	void remove_train(int i);
 	~MyTrail();
-	MyPos get_obs_pos(int idx);
 	float get_obs_speed(int idx) { return 0; };
 };

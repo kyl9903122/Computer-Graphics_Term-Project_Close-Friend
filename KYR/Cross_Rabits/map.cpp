@@ -139,11 +139,11 @@ GLvoid TimerFunction(int value)
 		cur_state_obs_pos[2] = states[cur_state_idx]->collision_pos[2];
 		cur_state_obs_cnt = states[cur_state_idx]->obs_cnt;
 		cur_state_tag = states[cur_state_idx]->tag;
-		next_state_obs_pos[0] = states[cur_state_idx + 1]->collision_pos[0];
+	/*	next_state_obs_pos[0] = states[cur_state_idx + 1]->collision_pos[0];
 		next_state_obs_pos[1] = states[cur_state_idx + 1]->collision_pos[1];
 		next_state_obs_pos[2] = states[cur_state_idx + 1]->collision_pos[2];
-		next_state_obs_cnt = states[cur_state_idx + 1]->obs_cnt;
-		next_state_tag = states[cur_state_idx + 1]->tag;
+		next_state_obs_cnt = states[cur_state_idx + 1]->obs_cnt;*/
+		//next_state_tag = states[cur_state_idx + 1]->tag;
 		if (hero.moving && hero.direction_angle == 0.0f) {
 			hero.on_the_log = false;
 			//hero.update(next_state_tag, cur_state_obs_pos, next_state_obs_pos, 0, next_state_obs_cnt);
@@ -207,6 +207,7 @@ GLvoid keyboard(unsigned char key, int x, int y) {
 			// move hero to front
 			hero.direction_angle = 0.0f;
 			cur_state_idx = (cur_state_idx + 1) % map_count;
+			hero.cur_state_idx = &cur_state_idx;
 			break;
 		case 'd':
 		case 'D':

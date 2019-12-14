@@ -21,7 +21,6 @@ public:
 	virtual void move() = 0;
 	virtual	bool check_removing() = 0;
 	virtual ~MyState() {}
-	virtual MyPos get_obs_pos(int idx) = 0;
 	virtual float get_obs_speed(int idx) = 0;
 };
 

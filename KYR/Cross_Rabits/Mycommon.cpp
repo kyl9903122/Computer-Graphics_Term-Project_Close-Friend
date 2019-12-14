@@ -71,7 +71,3 @@ void MyCommon::remove_tree(int i) {
 }
 
 MyCommon::~MyCommon() {};
-
-MyPos MyCommon::get_obs_pos(int idx) {
-	return trees[idx]->pos;
-}

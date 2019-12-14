@@ -77,7 +77,3 @@ void MyTrail::remove_train(int i) {
 }
 
 MyTrail::~MyTrail() {};
-
-MyPos MyTrail::get_obs_pos(int idx) {
-	return trains[idx]->pos;
-}

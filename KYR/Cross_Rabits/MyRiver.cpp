@@ -84,9 +84,6 @@ void MyRiver::remove_log(int i) {
 
 MyRiver::~MyRiver() {};
 
-MyPos MyRiver::get_obs_pos(int idx) {
-	return logs[idx]->pos;
-}
 
 float MyRiver::get_obs_speed(int idx) {
 	return logs[idx]->speed;
