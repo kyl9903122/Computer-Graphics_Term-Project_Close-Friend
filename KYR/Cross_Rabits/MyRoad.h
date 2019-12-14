@@ -4,16 +4,14 @@
 class MyRoad : public MyState
 {
 private:
-	MyTruck* trucks[2];
+	MyTruck* trucks[6];
 	const char* obj_path = "road.obj";
 public:
 	MyRoad();
-	void draw(glm::mat4 projection, glm::mat4 view, Shader shader);
+	void draw(glm::mat4 projection, glm::mat4 view);
 	void move();
 	bool check_removing();
 	void CreateTruck(int idx);
 	void remove_truck(int i);
-	~MyRoad();
-	float get_obs_speed(int idx) { return 0; };
 };
 

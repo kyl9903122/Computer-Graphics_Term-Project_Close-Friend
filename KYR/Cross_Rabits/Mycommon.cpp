@@ -21,7 +21,6 @@ MyCommon::MyCommon() {
 	collision_pos[1] = trees[1]->pos;
 	collision_pos[2] = trees[2]->pos;
 	obs_cnt = 3;
-	tag = 2;
 	std::cout << "complete creating River!" << std::endl;
 }
 
@@ -70,4 +69,6 @@ void MyCommon::remove_tree(int i) {
 	delete trees[i];
 }
 
-MyCommon::~MyCommon() {};
+MyPos MyCommon::get_obs_pos(int idx) {
+	return trees[idx]->pos;
+}

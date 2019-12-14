@@ -16,13 +16,10 @@ MyRiver::MyRiver() {
 	moving = false;
 	// please change
 	// you have to change this value when you start map scrolling
-	collision_pos[0] = logs[0]->pos;
-	collision_pos[1] = logs[1]->pos;
-	collision_pos[2] = logs[2]->pos;
 	moving_degree = 0;
+	std::cout << "complete creating River!" << std::endl;
 	obs_cnt = 3;
 	tag = 1;
-	std::cout << "complete creating River!" << std::endl;
 }
 
 void MyRiver::draw(glm::mat4 projection, glm::mat4 view, Shader shader) {
@@ -46,9 +43,9 @@ void MyRiver::move() {
 	// make logs move
 	for (int i = 0; i < 3; ++i) {
 		logs[i]->move(pos);
-		collision_pos[i] = logs[i]->pos;
 		if (logs[i]->check_removing())
 			remove_log(i);
+		collision_pos[i] = logs[i]->pos;
 	}
 
 	// make road move
@@ -82,9 +79,11 @@ void MyRiver::remove_log(int i) {
 		logs[i] = new MyLog(pos);
 }
 
-MyRiver::~MyRiver() {};
-
+MyPos MyRiver::get_obs_pos(int idx) {
+	return logs[idx]->pos;
+}
 
 float MyRiver::get_obs_speed(int idx) {
 	return logs[idx]->speed;
 }
+

@@ -3,7 +3,7 @@
 #include "MyTrain.h"
 class MyTrail : public MyState
 {
-private:
+public:
 	MyTrain* trains[1];
 	const char* obj_path = "trail.obj";
 
@@ -14,6 +14,6 @@ public:
 	bool check_removing();
 	void CreateTrain(int idx);
 	void remove_train(int i);
-	~MyTrail();
+	MyPos get_obs_pos(int idx);
 	float get_obs_speed(int idx) { return 0; };
 };

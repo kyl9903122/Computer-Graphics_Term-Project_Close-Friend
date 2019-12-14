@@ -8,20 +8,26 @@
 
 
 class loadOBJ {
-private:
+public:
 	std::vector< unsigned int > vertexIndices, uvIndices, normalIndices;
 	std::vector< glm::vec3 > temp_vertices;
 	std::vector< glm::vec3 > temp_uvs;
 	std::vector< glm::vec3 > temp_normals;
-	std::vector< glm::vec3 > vertices;
-	std::vector< glm::vec3 > uvs;
-	std::vector< glm::vec3 > normals; // 지금은 안쓸거에요. 
-	GLuint lightbuffer;
-	GLuint colorbuffer;
-	GLuint vertexbuffer;
 
 	const char * objPath; 
 	unsigned int ourShaderID;
+
+	loadOBJ(const char * obj, unsigned int ID)
+	{
+		objPath = obj;
+		ourShaderID = ID;
+	}
+
+	void load(glm::mat4 projection, glm::mat4 view);
+
+	void setTransform(glm::mat4 Transforme);
+
+	void draw();
 
 	void madeOBJ(const char * path, std::vector < glm::vec3 > & out_vertices, std::vector < glm::vec3 > & out_uvs, std::vector < glm::vec3 > & out_normals)
 	{
@@ -89,21 +95,6 @@ private:
 		}
 		fclose(file);
 	}
-public:
-	loadOBJ(){}
-
-	loadOBJ(const char * obj, unsigned int ID)
-	{
-		objPath = obj;
-		ourShaderID = ID;
-		madeOBJ(objPath, vertices, uvs, normals);
-	}
-
-	void load(glm::mat4 projection, glm::mat4 view);
-
-	void setTransform(glm::mat4 Transforme);
-
-	void draw();
 };
 
 
