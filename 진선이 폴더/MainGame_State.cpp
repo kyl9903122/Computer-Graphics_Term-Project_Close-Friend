@@ -52,6 +52,11 @@ void MainGame_State::update() {
 		//hero
 		hero_update();
 	}
+	if (hero.soul_moving) {
+		change_timer -= 1;
+		if (change_timer < 0)
+			next_state = 0;
+	}
 }
 
 void MainGame_State::keyboard(unsigned char key, int x, int y) {

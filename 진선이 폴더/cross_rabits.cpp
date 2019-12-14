@@ -1,11 +1,15 @@
 #include "MainGame_State.h"
+#include "Title_State.h"
 
-MainGame_State main_game;
+Title_State title;
+MainGame_State* main_game = nullptr;
 
 GLvoid drawScene();
 GLvoid Reshape(int w, int h);
 GLvoid TimerFunction(int value);
 GLvoid keyboard(unsigned char key, int x, int y);
+
+int state_mode = 0;
 
 int main(int argc, char** argv)
 {
@@ -15,7 +19,6 @@ int main(int argc, char** argv)
 	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(900, 700);
 	glutCreateWindow("Floating Window");
-	glClearColor(0.5f, 0.9f, 0.4f, 1.0f);
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK) {
 		std::cerr << "Unable to initialize GLEW" << std::endl;
@@ -23,8 +26,7 @@ int main(int argc, char** argv)
 	}
 	else
 		std::cout << "GLEW Initialized" << std::endl;
-	main_game.shader = new Shader("vertexshader.glvs", "fragmentshader.glfs");
-	main_game.hero_shader = new Shader("hero_vertexshader.glvs", "hero_fragmentshader.glfs");
+	title.shader = new Shader("font_vertexshader.glvs", "font_fragmentshader.glfs");
 
 	glutDisplayFunc(drawScene);
 	glutTimerFunc(10, TimerFunction, 1);
@@ -32,8 +34,9 @@ int main(int argc, char** argv)
 	glutReshapeFunc(Reshape);
 	glutMainLoop();
 
-	delete main_game.shader;
-	delete main_game.hero_shader;
+	delete title.shader;
+	delete main_game->shader;
+	delete main_game->hero_shader;
 }
 
 GLvoid drawScene() 
@@ -41,12 +44,26 @@ GLvoid drawScene()
 	std::cout << "draw" << std::endl;
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	switch (state_mode) {
+	case 0:
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		break;
+	case 1:
+		glClearColor(0.5f, 0.9f, 0.4f, 1.0f);
+		break;
+	}
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 
-	main_game.Display();
+	switch (state_mode) {
+	case 0:
+		title.Display();
+		break;
+	case 1:
+		main_game->Display();
+		break;
+	}
 	glutSwapBuffers();
 }
 
@@ -57,12 +74,35 @@ GLvoid Reshape(int w, int h) {
 
 GLvoid TimerFunction(int value)
 {
-	main_game.update();
-
+	switch (state_mode) {
+	case 0:
+		title.update();
+		break;
+	case 1:
+		main_game->update();
+		state_mode = main_game->next_state;
+		if (state_mode != 1) {
+			delete main_game;
+		}
+		break;
+	}
 	glutTimerFunc(10, TimerFunction, 1);
 	glutPostRedisplay();
 }
 
 GLvoid keyboard(unsigned char key, int x, int y) {
-	main_game.keyboard(key, x, y);
+	switch (state_mode) {
+	case 0:
+		title.keyboard(key, x, y);
+		state_mode = title.next_state;
+		if (state_mode == 1) {
+			main_game = new MainGame_State;
+			main_game->shader = new Shader("vertexshader.glvs", "fragmentshader.glfs");
+			main_game->hero_shader = new Shader("hero_vertexshader.glvs", "hero_fragmentshader.glfs");
+	}
+		break;
+	case 1:
+		main_game->keyboard(key, x, y);
+		break;
+	}
 }

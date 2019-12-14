@@ -83,6 +83,12 @@ void kyrHero::draw(glm::mat4 projection, glm::mat4 view, Shader shader) {
 	model = glm::translate(model, glm::vec3(current_pos.x, current_pos.y, current_pos.z));
 	model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	model = glm::rotate(model, glm::radians(-direction_angle), glm::vec3(0.0f, 1.0f, 0.0f));
+
+	// lightning
+	shader.setVec3("viewPos", glm::vec3(0.0f, 45.0f, 50));
+	shader.setVec3("lightColor", glm::vec3(1.0f, 1.0f, 0.9f));
+	shader.setVec3("lightPos", glm::vec3(0, 800, 2000));
+
 	// apply transform matix
 	obj.setTransform(model);
 
