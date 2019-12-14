@@ -1,6 +1,5 @@
 #include "firework_particle.h"
 
-
 firework::firework()
 {
 	color_random1 = rand() % 1000 * 0.001;
@@ -25,7 +24,7 @@ void firework::draw() {
 	// you can name your shader files however you like
 	snowShader.use();
 
-	for (int i = 0; i < 40; i++) {
+	for (int i = 0; i < 50; i++) {
 
 		snow_obj[i] = loadOBJ("snow.obj", snowShader.ID);
 
