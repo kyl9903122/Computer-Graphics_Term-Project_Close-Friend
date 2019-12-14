@@ -38,6 +38,7 @@ void MyTrail::draw(glm::mat4 projection, glm::mat4 view, Shader shader) {
 	obj.setTransform(model);
 
 	obj.draw();
+	train_warning_light(projection, view);
 	trains[0]->draw(projection, view, model, shader);
 }
 
@@ -74,6 +75,39 @@ void MyTrail::remove_train(int i) {
 	// 2. create
 	if (pos.z <= 600)
 		trains[i] = new MyTrain(pos);
+}
+
+
+void MyTrail::train_warning_light(glm::mat4 projection, glm::mat4 view)
+{
+	Shader light("trainwarningvertex.glvs", "trainwarningfragment.glfs"); // you can name your shader files however you like
+
+	light.use();
+
+	loadOBJ lightbox("box.obj", light.ID);
+
+	lightbox.load(projection, view);
+
+	//За·Д
+	glm::mat4 transMatrix = glm::mat4(1.0f);
+	glm::mat4 scaleMatix = glm::mat4(1.0f);
+	glm::mat4 myTransformeVector = glm::mat4(1.0f);
+	glm::vec3 lightColor = glm::vec3(1.0f);
+
+	transMatrix = glm::translate(transMatrix, glm::vec3(0.0f, 0.0f, pos.z));
+	scaleMatix = glm::scale(scaleMatix, glm::vec3(10.0f, 10.0f, 10.0f));
+
+	myTransformeVector = transMatrix * scaleMatix;
+	lightbox.setTransform(myTransformeVector);
+
+	if (trains[0]->pos.x > -1500)
+		lightColor = glm::vec3(1.0f, 0.0f, 0.0f);
+	if (trains[0]->pos.x > 600)
+		lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
+
+	light.setVec3("lightColor", lightColor);
+
+	lightbox.draw();
 }
 
 MyTrail::~MyTrail() {};
