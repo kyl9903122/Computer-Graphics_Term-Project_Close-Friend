@@ -1,32 +1,34 @@
 #pragma once
+#include<list>
+#include <fstream>
 #include "loadObj.h"
 #include "MyHeader.h"
-#include"firework_particle.h"
 
-#include <math.h>
-class Title_State
+class End_State
 {
 public:
+	int next_state = 2;
 	glm::mat4 projection = glm::ortho(-300 * (float)SCR_WIDTH / (float)SCR_HEIGHT, 300 * (float)SCR_WIDTH / (float)SCR_HEIGHT, (float)-400, (float)400, (float)-600, (float)600);
 	glm::vec3 cameraPos = glm::vec3(8.0f, 45.0f, 40);
 	glm::vec3 cameraDirection = cameraDirection = glm::vec3(0.0f, 0.0f, 0.0f);
 	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 	glm::mat4 view = glm::lookAt(cameraPos, cameraDirection, cameraUp);
 
-	MyPos obj_pos = { 0.0f,0.0f,0.0f };
-	Shader* shader;
-
-	firework firework_particle[4];
-
-	float font_sin_angle = 0.0f;
-	int next_state = 0;
-	
+	std::list<int> rank;
+	int cur_score;
+	int best_score;
+	int mid_score;
+	int last_score;
+	Shader* shader1 = nullptr;
+	Shader* shader2 = nullptr;
+	Shader* shader3 = nullptr;
 
 public:
+	End_State();
+	~End_State();
 	void Display();
 	void update();
 	void keyboard(unsigned char key, int x, int y);
-	void draw_font();
-	void draw_background();
+	void draw_score(float y_pos, int score);
 };
 

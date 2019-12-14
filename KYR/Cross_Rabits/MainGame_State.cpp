@@ -7,7 +7,9 @@ MainGame_State::MainGame_State() {
 }
 
 MainGame_State::~MainGame_State() {
-
+	std::ofstream out("rank.txt",std::ios::app);
+	out << pass_state_cnt << '\n';
+	out.close();
 }
 
 void MainGame_State::Display() {
@@ -55,7 +57,7 @@ void MainGame_State::update() {
 	if (hero.soul_moving) {
 		change_timer -= 1;
 		if (change_timer < 0)
-			next_state = 0;
+			next_state = 2;
 	}
 }
 
@@ -68,7 +70,7 @@ void MainGame_State::keyboard(unsigned char key, int x, int y) {
 			hero.direction_angle = 0.0f;
 			// this is needed to move hero to side when collide with tree
 			cur_state_idx = (cur_state_idx + 1) % map_count;
-			hero.cur_state_idx = &cur_state_idx;
+			pass_state_cnt += 1;
 			break;
 		case 'd':
 		case 'D':

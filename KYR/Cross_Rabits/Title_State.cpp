@@ -6,12 +6,15 @@ void Title_State::Display() {
 	shader->setVec3("viewPos", glm::vec3(0.0f, 45.0f, 50));
 	shader->setVec3("lightColor", glm::vec3(0.5f, 0.5f, 0.5f));
 	shader->setVec3("lightPos", glm::vec3(0, 800, 2000));
+	shader->setVec3("obj_color", glm::vec3(1.0,0.6,0.0));
 	draw_font();
+	for (int i = 0; i < 4; i++)
+		firework_particle[i].draw();
 }
 
 void Title_State::update() {
-	font_sin_angle = (float)(((int)font_sin_angle + 1) % 180);
-	obj_pos.z = 20*sin(glm::radians(font_sin_angle));
+	font_sin_angle = (float)(((int)font_sin_angle + 5) % 180);
+	obj_pos.z = 50*sin(glm::radians(font_sin_angle));
 }
 
 void Title_State::keyboard(unsigned char key, int x, int y) {

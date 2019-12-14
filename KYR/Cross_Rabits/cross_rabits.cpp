@@ -1,8 +1,10 @@
 #include "MainGame_State.h"
 #include "Title_State.h"
+#include "End_State.h"
 
 Title_State title;
 MainGame_State* main_game = nullptr;
+End_State* end;
 
 GLvoid drawScene();
 GLvoid Reshape(int w, int h);
@@ -35,8 +37,6 @@ int main(int argc, char** argv)
 	glutMainLoop();
 
 	delete title.shader;
-	delete main_game->shader;
-	delete main_game->hero_shader;
 }
 
 GLvoid drawScene() 
@@ -46,7 +46,8 @@ GLvoid drawScene()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	switch (state_mode) {
 	case 0:
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	case 2:
+		glClearColor(1.0f, 0.7f, 0.9f, 1.0f);
 		break;
 	case 1:
 		glClearColor(0.5f, 0.9f, 0.4f, 1.0f);
@@ -63,6 +64,8 @@ GLvoid drawScene()
 	case 1:
 		main_game->Display();
 		break;
+	case 2:
+		end->Display();
 	}
 	glutSwapBuffers();
 }
@@ -82,8 +85,18 @@ GLvoid TimerFunction(int value)
 		main_game->update();
 		state_mode = main_game->next_state;
 		if (state_mode != 1) {
+			std :: cout << state_mode << std::endl;
+			delete main_game->shader;
+			delete main_game->hero_shader;
 			delete main_game;
+			end = new End_State;
+			end->shader1 = new Shader("number_vertexshader.glvs", "number_fragmentshader.glfs");
+			end->shader2 = new Shader("number_vertexshader.glvs", "number_fragmentshader.glfs");
+			end->shader3 = new Shader("number_vertexshader.glvs", "number_fragmentshader.glfs");
 		}
+		break;
+	case 2:
+		end->update();
 		break;
 	}
 	glutTimerFunc(10, TimerFunction, 1);
@@ -103,6 +116,14 @@ GLvoid keyboard(unsigned char key, int x, int y) {
 		break;
 	case 1:
 		main_game->keyboard(key, x, y);
+		break;
+	case 2:
+		end->keyboard(key, x, y);
+		state_mode = title.next_state;
+		delete end->shader1;
+		delete end->shader2;
+		delete end->shader3;
+		delete end;
 		break;
 	}
 }
