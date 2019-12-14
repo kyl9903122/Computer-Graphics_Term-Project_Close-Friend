@@ -33,8 +33,16 @@ void End_State::update() {
 		rank.reverse();
 		iter = rank.begin();
 		best_score = *(iter);
-		mid_score = *(++iter);
-		last_score = *(++iter);
+		if (best_score == cur_score) {
+			++iter;
+			mid_score = *(++iter);
+			last_score = *(++iter);
+
+		}
+		else {
+			mid_score = *(++iter);
+			last_score = *(++iter);
+		}
 		rank.clear();
 	}
 }
