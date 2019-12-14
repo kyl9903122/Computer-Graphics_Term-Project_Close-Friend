@@ -10,6 +10,8 @@ void kyrHero::move() {
 	if(!soul_moving)
 		current_pos.z += 5;
 	if (moving && !soul_moving) {
+		on_the_log = false;
+		log_speed = 0;
 		switch ((int)direction_angle) {
 		case 0:
 			// directon == front
@@ -38,12 +40,19 @@ void kyrHero::move() {
 	}
 }
 
-bool kyrHero::check_collision(MyPos obs_pos) {
+bool kyrHero::check_collision(MyPos obs_pos,int obs_tag) {
 	// make obs_bounding_box
 	MyBoundingBox obs_bounding_box = {
 		obs_pos.x + 20,25.0f,25.0f,
 		obs_pos.x - 20,-25.0f,-25.0f
 	};
+	std::cout << "obs_tag: " << obs_tag << std::endl;
+	if (obs_tag == 3) {
+			obs_bounding_box = {
+			obs_pos.x + 400,25.0f,25.0f,
+			obs_pos.x - 400,-25.0f,-25.0f
+		};
+	}
 	std::cout << "hero.x: " << current_pos.x << std::endl;
 	std::cout << "obs.x: " << obs_pos.x << std::endl;
 	// change my_bounding_box
@@ -59,6 +68,12 @@ bool kyrHero::check_collision(MyPos obs_pos) {
 
 	if (bounding_box.left > obs_bounding_box.right)
 		return false;
+
+	if (bounding_box.top < obs_bounding_box.bottom)
+		return false;
+	if (bounding_box.bottom > obs_bounding_box.top)
+		return false;
+
 	std::cout << "collide" << std::endl;
 	return true;
 }
@@ -86,7 +101,7 @@ bool kyrHero::check_death(MyPos obs_pos,int obs_tag) {
 		// case 1. collision with obstacles
 		if (obs_tag == 1) {
 			// obstacle is log
-			if (check_collision(obs_pos)) {
+			if (check_collision(obs_pos,obs_tag)) {
 				// hero is on the log
 				current_pos.y = obs_pos.y + 25+size/2;
 				// hero has to stop jumping
@@ -114,14 +129,10 @@ bool kyrHero::check_death(MyPos obs_pos,int obs_tag) {
 			}
 		}
 		else if (obs_tag == 2) {
-			if (check_collision(obs_pos)) {
+			if (check_collision(obs_pos,obs_tag)) {
 				// hero is on the log
 				// hero has to stop jumping
 				switch (int(direction_angle)) {
-				case 0:
-					// move hero to front
-					current_pos.z -= 5;
-					break;
 				case 90:
 					//move hero to rihgt
 					current_pos.x -= 5;
@@ -135,7 +146,7 @@ bool kyrHero::check_death(MyPos obs_pos,int obs_tag) {
 			}		
 		}
 		else {
-			if (check_collision(obs_pos)) {
+			if (check_collision(obs_pos,obs_tag)) {
 				moving = false;
 				soul_moving = true;
 				return true;
@@ -146,21 +157,25 @@ bool kyrHero::check_death(MyPos obs_pos,int obs_tag) {
 }
 
 void kyrHero::update(int tag,MyPos* obs_pos1, MyPos* obs_pos2, int obs_cnt1, int obs_cnt2) {
-	move();
-		for (int i = 0; i <obs_cnt1;++i) {
+	if (!soul_moving) {
+		move();
+		current_pos.x += log_speed;
+		std::cout << "log_speed: " << log_speed << std::endl;
+		for (int i = 0; i < obs_cnt1; ++i) {
 			if (check_death(obs_pos1[i], tag)) {
 				//test 
 				std::cout << "die!" << std::endl;
 			}
 		}
 		if (obs_pos2 != nullptr) {
-			for (int i = 0; i <obs_cnt2; ++i) {
+			for (int i = 0; i < obs_cnt2; ++i) {
 				if (check_death(obs_pos2[i], tag)) {
 					//test 
 					std::cout << "die!" << std::endl;
 				}
 			}
 		}
+	}
 	soul_move();
 }
 
@@ -176,14 +191,14 @@ void kyrHero::soul_draw(glm::mat4 projection, glm::mat4 view, Shader shader) {
 		loadOBJ soul_obj("ghost.obj", shader.ID);
 		soul_obj.load(projection, view);
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::scale(model, glm::vec3(0.8f, 0.8f, 0.8f));
 		model = glm::translate(model, glm::vec3(soul_pos.x+current_pos.x, soul_pos.y+current_pos.y, current_pos.z));
+		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 
 		soul_obj.setTransform(model);
 		soul_obj.draw();
 	}
 }
 void kyrHero::move_on_the_log(float log_speed) {
-	current_pos.z += 5;
-	current_pos.x += log_speed;
+
+	move();
 }

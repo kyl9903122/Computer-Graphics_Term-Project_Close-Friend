@@ -24,10 +24,11 @@ public:
 	bool arrive_at_floor = false;
 	bool on_the_log = false;
 	int log_idx;
+	float log_speed = 0;
 
 public:
 	void keyboard(unsigned char key, int x, int y);
-	bool check_collision(MyPos obs_pos);
+	bool check_collision(MyPos obs_pos,int obs_tag);
 	void move();
 	bool check_death(MyPos obs_pos, int obs_tag);
 	// framework

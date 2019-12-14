@@ -1,0 +1,4 @@
+﻿  MyHero.cpp
+  map.cpp
+C:\Users\김유림\Desktop\컴그\텀프\MyFolder\Mapping_completed_ver\map.cpp(196,24): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+LINK : fatal error LNK1181: 'freeglut.ilb' 입력 파일을 열 수 없습니다.

@@ -22,6 +22,7 @@ MyTrail::MyTrail() {
 	collision_pos[1] = { -800,-800,-800 };
 	collision_pos[2] = { -800,-800,-800 };
 	obs_cnt = 1;
+	tag = 3;
 	std::cout << "complete creating trail!" << std::endl;
 }
 

@@ -151,11 +151,13 @@ GLvoid TimerFunction(int value)
 		}
 		else if (hero.on_the_log) {
 			for (int i = 0; i < 3; ++i) {
-				if (hero.check_collision(cur_state_obs_pos[i])) {
-					hero.move_on_the_log(states[cur_state_idx]->get_obs_speed(i));
+				if (hero.check_collision(cur_state_obs_pos[i], cur_state_tag)) {
+					hero.log_speed = states[cur_state_idx]->get_obs_speed(i);				
+					std::cout << "on_the_log is true" << std::endl;
 					break;
 				}
 			}
+			hero.update(cur_state_tag, cur_state_obs_pos, nullptr, cur_state_obs_cnt, 0);
 		}
 		else {
 			hero.update(cur_state_tag, cur_state_obs_pos, nullptr, cur_state_obs_cnt, 0);
