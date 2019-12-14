@@ -4,7 +4,7 @@
 
 class MyLog
 {
-private:
+public:
 	MyPos pos;
 	const char* obj_path = "log.obj";
 	float speed;

@@ -4,11 +4,14 @@
 
 class MyState
 {
-protected:
+public:
 	// if character move, map move, this varibles check that map is moving
 	bool moving;
 	// map move each frame, per this degree
 	float moving_degree;
+	MyPos collision_pos[3];
+	int obs_cnt;
+	int tag = 0;
 
 public:
 	// current state's position
@@ -18,5 +21,6 @@ public:
 	virtual void move() = 0;
 	virtual	bool check_removing() = 0;
 	virtual ~MyState() {}
+	virtual float get_obs_speed(int idx) = 0;
 };
 

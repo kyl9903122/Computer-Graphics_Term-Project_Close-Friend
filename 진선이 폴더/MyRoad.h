@@ -14,5 +14,6 @@ public:
 	void CreateTruck(int idx);
 	void remove_truck(int i);
 	~MyRoad();
+	float get_obs_speed(int idx) { return 0; };
 };
 

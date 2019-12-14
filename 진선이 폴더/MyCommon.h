@@ -15,5 +15,6 @@ public:
 	void CreateTree(int idx);
 	void remove_tree(int i);
 	~MyCommon();
+	float get_obs_speed(int idx) { return 0; };
 };
 

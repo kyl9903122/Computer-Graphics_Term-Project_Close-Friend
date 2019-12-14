@@ -3,7 +3,7 @@
 
 class MyTree
 {
-private:
+public:
 	MyPos pos;
 	const char* obj_path = "tree.obj";
 	float size;

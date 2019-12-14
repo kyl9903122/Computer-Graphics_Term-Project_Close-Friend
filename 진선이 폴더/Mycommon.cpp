@@ -17,6 +17,11 @@ MyCommon::MyCommon() {
 	// please change
 	// you have to change this value when you start map scrolling
 	moving_degree = 0;
+	collision_pos[0] = trees[0]->pos;
+	collision_pos[1] = trees[1]->pos;
+	collision_pos[2] = trees[2]->pos;
+	obs_cnt = 3;
+	tag = 2;
 	std::cout << "complete creating River!" << std::endl;
 }
 

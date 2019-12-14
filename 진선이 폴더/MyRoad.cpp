@@ -16,9 +16,12 @@ MyRoad::MyRoad() {
 
 	// init remaining variables
 	moving = false;
-	// please change
-	// you have to change this value when you start map scrolling
+	// please changeg
 	moving_degree = 0;
+	collision_pos[0] = trucks[0]->pos;
+	collision_pos[1] = trucks[0]->pos;
+	collision_pos[2] = { -800,-800,-800 };
+	obs_cnt = 2;
 	std::cout << "complete creating road!" << std::endl;
 }
 
@@ -42,6 +45,7 @@ MyRoad::MyRoad() {
 	 // make trucks move
 	 for (int i = 0; i < 2; ++i) {
 		 trucks[i]->move(pos);
+		 collision_pos[i] = trucks[i]->pos;
 		 if (trucks[i]->check_removing())
 			 remove_truck(i);
 	 }

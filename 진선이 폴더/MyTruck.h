@@ -4,7 +4,7 @@
 
 class MyTruck
 {
-private:
+public:
 	const char* obj_path;
 	float speed;
 	float size;
