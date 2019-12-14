@@ -11,19 +11,19 @@ void kyrHero::move() {
 		switch ((int)direction_angle) {
 		case 0:
 			// directon == front
-			current_pos.z -= 5;
+			current_pos.z -= 10;
 			break;
 		case 90:
 			// direction == right
-			current_pos.x += 5;
+			current_pos.x += 10;
 			break;
 		case -90:
 			// direction == left
-			current_pos.x -= 5;
+			current_pos.x -= 10;
 			break;
 		}
 		// hero is jumping
-		jumping_velocity -= 6;
+		jumping_velocity -= 10;
 		current_pos.y += jumping_velocity;
 		if (current_pos.y <= 0.0f) {
 			// hero fell to the floor
@@ -126,10 +126,11 @@ bool kyrHero::check_death(MyPos obs_pos,int obs_tag) {
 		}
 		else if (obs_tag == 2) {
 			if (check_collision(obs_pos,obs_tag)) {
-				// hero is on the log
-				// hero has to stop jumping
+				// hero is on the common state
+				// when collide with tree reverse the moving
 				switch (int(direction_angle)) {
 				case 0 :
+					// when hero collide with tree change its state. and move it on that state
 					cur_state_idx--;
 				case 90:
 					//move hero to rihgt
@@ -154,23 +155,14 @@ bool kyrHero::check_death(MyPos obs_pos,int obs_tag) {
 		}
 }
 
-void kyrHero::update(int tag,MyPos* obs_pos1, MyPos* obs_pos2, int obs_cnt1, int obs_cnt2) {
+void kyrHero::update(int tag,MyPos* obs_pos1, int obs_cnt1) {
 	if (!soul_moving) {
 		move();
 		current_pos.x += log_speed;
 		std::cout << "log_speed: " << log_speed << std::endl;
 		for (int i = 0; i < obs_cnt1; ++i) {
 			if (check_death(obs_pos1[i], tag)) {
-				//test 
-				std::cout << "die!" << std::endl;
-			}
-		}
-		if (obs_pos2 != nullptr) {
-			for (int i = 0; i < obs_cnt2; ++i) {
-				if (check_death(obs_pos2[i], tag)) {
-					//test 
-					std::cout << "die!" << std::endl;
-				}
+
 			}
 		}
 	}

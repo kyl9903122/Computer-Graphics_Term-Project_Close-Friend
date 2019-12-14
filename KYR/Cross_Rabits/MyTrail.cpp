@@ -18,9 +18,11 @@ MyTrail::MyTrail() {
 	// please change
 	// you have to change this value when you start map scrolling
 	moving_degree = 0;
+	moving_degree = 0;
 	collision_pos[1] = { -800,-800,-800 };
 	collision_pos[2] = { -800,-800,-800 };
 	obs_cnt = 1;
+	tag = 3;
 	std::cout << "complete creating trail!" << std::endl;
 }
 
@@ -74,6 +76,4 @@ void MyTrail::remove_train(int i) {
 		trains[i] = new MyTrain(pos);
 }
 
-MyPos MyTrail::get_obs_pos(int idx) {
-	return trains[idx]->pos;
-}
+MyTrail::~MyTrail() {};

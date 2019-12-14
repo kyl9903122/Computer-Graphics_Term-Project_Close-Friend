@@ -1,4 +1,0 @@
-﻿  MyRoad.cpp
-  map.cpp
-  코드를 생성하고 있습니다...
-C:\Users\김유림\Desktop\컴그\텀프\MyFolder\Mapping 2\MyRoad.cpp(59): error C4716: 'MyRoad::check_removing': 값을 반환해야 합니다.
