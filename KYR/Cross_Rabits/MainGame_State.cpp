@@ -3,11 +3,12 @@
 
 MainGame_State::MainGame_State() {
 	//test
+	PlaySound(TEXT("./Spongebob.wav"), NULL, SND_FILENAME | SND_NODEFAULT | SND_ASYNC | SND_LOOP);
 	init_map();
 }
 
 MainGame_State::~MainGame_State() {
-	std::ofstream out("rank.txt",std::ios::app);
+	std::ofstream out("rank.txt", std::ios::app);
 	out << pass_state_cnt << '\n';
 	out.close();
 }

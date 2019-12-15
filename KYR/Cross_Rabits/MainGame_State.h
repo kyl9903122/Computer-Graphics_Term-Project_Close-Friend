@@ -1,4 +1,8 @@
 #pragma once
+#include <windows.h>
+#include <mmsystem.h>
+#include <conio.h>
+
 #include "MyRoad.h"
 #include "MyTruck.h"
 #include "MyRiver.h"
@@ -8,6 +12,8 @@
 #include "MyCommon.h"
 #include "MyTree.h"
 #include "MyHero.h"
+#define _CRT_NONSTDC_NO_WARNINGS
+#pragma comment(lib, "winmm.lib")
 
 class MainGame_State
 {
