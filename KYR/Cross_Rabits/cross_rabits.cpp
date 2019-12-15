@@ -28,8 +28,8 @@ int main(int argc, char** argv)
 	}
 	else
 		std::cout << "GLEW Initialized" << std::endl;
-	title.shader = new Shader("font_vertexshader.glvs", "font_fragmentshader.glfs");
-
+	title.shader = new Shader("hero_vertexshader.glvs", "hero_fragmentshader.glfs");
+	title.font_shader = new Shader("font_vertexshader.glvs", "font_fragmentshader.glfs");
 	glutDisplayFunc(drawScene);
 	glutTimerFunc(10, TimerFunction, 1);
 	glutKeyboardFunc(keyboard);
@@ -37,6 +37,7 @@ int main(int argc, char** argv)
 	glutMainLoop();
 
 	delete title.shader;
+	delete title.font_shader;
 }
 
 GLvoid drawScene()

@@ -15,6 +15,7 @@ public:
 
 	MyPos obj_pos = { 0.0f,0.0f,0.0f };
 	Shader* shader;
+	Shader* font_shader;
 
 	firework firework_particle[4];
 
