@@ -100,65 +100,69 @@ void kyrHero::draw(glm::mat4 projection, glm::mat4 view, Shader shader) {
 
 bool kyrHero::check_death(MyPos obs_pos,int obs_tag) {
 	std::cout << "check death" << std::endl;
-		// case 1. collision with obstacles
-		if (obs_tag == 1) {
-			// obstacle is log
-			if (check_collision(obs_pos,obs_tag)) {
-				// hero is on the log
-				current_pos.y = obs_pos.y + 25+size/2;
-				// hero has to stop jumping
-				arrive_at_floor = true;
-				moving = false;
-				on_the_log = true;
-				jumping_velocity = 30.0f;
-				return false;
-			}
-			else {
-				// hero falls into the river
-				if (current_pos.y <= 0) {
-					std::cout << "fall into the river" << std::endl;
-					current_pos.y -= 5;
-					moving = false;
-					if (current_pos.y < -50) {
-						std::cout << "soul moving" << std::endl;
-						soul_moving = true;
-						current_pos.y += 5;
-					}
-					return true;
-				}
-				else
-					return false;
-			}
-		}
-		else if (obs_tag == 2) {
-			if (check_collision(obs_pos,obs_tag)) {
-				// hero is on the common state
-				// when collide with tree reverse the moving
-				switch (int(direction_angle)) {
-				case 0 :
-					// when hero collide with tree change its state. and move it on that state
-					cur_state_idx--;
-				case 90:
-					//move hero to rihgt
-					current_pos.x -= 10;
-					break;
-				case -90:
-					// move hero to left
-					current_pos.x += 10;
-					break;
-				}
-				return false;
-			}		
+	if (current_pos.z > 545) {
+		soul_moving = true;
+	}
+	// case 1. collision with obstacles
+	if (obs_tag == 1) {
+		// obstacle is log
+		if (check_collision(obs_pos,obs_tag)) {
+			// hero is on the log
+			current_pos.y = obs_pos.y + 20+size/2;
+			// hero has to stop jumping
+			arrive_at_floor = true;
+			moving = false;
+			on_the_log = true;
+			jumping_velocity = 30.0f;
+			return false;
 		}
 		else {
-			if (check_collision(obs_pos,obs_tag)) {
+			// hero falls into the river
+			if (current_pos.y < obs_pos.y + 20 + size / 2) {
+				fall_into_river = true;
+				std::cout << "fall into the river" << std::endl;
+				current_pos.y -= 5;
 				moving = false;
-				soul_moving = true;
+				if (current_pos.y < -50) {
+					std::cout << "soul moving" << std::endl;
+					soul_moving = true;
+					current_pos.y += 5;
+				}
 				return true;
 			}
 			else
 				return false;
 		}
+	}
+	else if (obs_tag == 2) {
+		if (check_collision(obs_pos,obs_tag)) {
+			// hero is on the common state
+			// when collide with tree reverse the moving
+			switch (int(direction_angle)) {
+			case 0 :
+				// when hero collide with tree change its state. and move it on that state
+				cur_state_idx--;
+			case 90:
+				//move hero to rihgt
+				current_pos.x -= 10;
+				break;
+			case -90:
+				// move hero to left
+				current_pos.x += 10;
+				break;
+			}
+			return false;
+		}		
+	}
+	else {
+		if (check_collision(obs_pos,obs_tag)) {
+			moving = false;
+			soul_moving = true;
+			return true;
+		}
+		else
+			return false;
+	}
 }
 
 void kyrHero::update(int tag,MyPos* obs_pos1, int obs_cnt1) {

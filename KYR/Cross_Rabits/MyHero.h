@@ -24,6 +24,7 @@ public:
 	bool arrive_at_floor = false;
 	bool on_the_log = false;
 	float log_speed = 0;
+	bool fall_into_river = false;
 	int* cur_state_idx = nullptr;
 
 public:
