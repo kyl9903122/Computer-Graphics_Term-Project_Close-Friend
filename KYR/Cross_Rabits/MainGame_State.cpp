@@ -56,6 +56,7 @@ void MainGame_State::update() {
 		hero_update();
 	}
 	if (hero.soul_moving) {
+		PlaySound(NULL,0,0);
 		change_timer -= 1;
 		if (change_timer < 0)
 			next_state = 2;
