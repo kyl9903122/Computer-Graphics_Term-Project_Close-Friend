@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="01. headers">
+      <UniqueIdentifier>{662007d9-80b7-49b9-beeb-300b64e91ea2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. framework">
+      <UniqueIdentifier>{36152a84-1162-4ccf-9afb-13dd1b0c0074}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. hero">
+      <UniqueIdentifier>{3c66cf7d-05a8-456f-8a13-e5be3ed1fb78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. State">
+      <UniqueIdentifier>{f9811baa-132b-4499-a7f0-3ebe295d9f83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Common">
+      <UniqueIdentifier>{2170e10f-7a30-4470-9323-8da9d04d9ff8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Road">
+      <UniqueIdentifier>{c17a2f27-64aa-4afe-8654-bb1f9780b0d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. River">
+      <UniqueIdentifier>{68e43c22-9793-43bc-8e1d-c5c41ea97e92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Trail">
+      <UniqueIdentifier>{ea1d5cc3-37eb-4222-8f31-1fc423c9c133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09.fire">
+      <UniqueIdentifier>{a3861ec3-1544-4a20-af4a-836013a46a63}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MyHeader.h">
+      <Filter>01. headers</Filter>
+    </ClInclude>
+    <ClInclude Include="loadObj.h">
+      <Filter>01. headers</Filter>
+    </ClInclude>
+    <ClInclude Include="shader.h">
+      <Filter>01. headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame_State.h">
+      <Filter>02. framework</Filter>
+    </ClInclude>
+    <ClInclude Include="End_State.h">
+      <Filter>02. framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Title_State.h">
+      <Filter>02. framework</Filter>
+    </ClInclude>
+    <ClInclude Include="MyHero.h">
+      <Filter>03. hero</Filter>
+    </ClInclude>
+    <ClInclude Include="MyState.h">
+      <Filter>04. State</Filter>
+    </ClInclude>
+    <ClInclude Include="MyCommon.h">
+      <Filter>05. Common</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTree.h">
+      <Filter>05. Common</Filter>
+    </ClInclude>
+    <ClInclude Include="MyRoad.h">
+      <Filter>06. Road</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTruck.h">
+      <Filter>06. Road</Filter>
+    </ClInclude>
+    <ClInclude Include="MyRiver.h">
+      <Filter>07. River</Filter>
+    </ClInclude>
+    <ClInclude Include="MyLog.h">
+      <Filter>07. River</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTrain.h">
+      <Filter>08. Trail</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTrail.h">
+      <Filter>08. Trail</Filter>
+    </ClInclude>
+    <ClInclude Include="firework_particle.h">
+      <Filter>09.fire</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="loadOBJ.cpp">
+      <Filter>01. headers</Filter>
+    </ClCompile>
+    <ClCompile Include="End_State.cpp">
+      <Filter>02. framework</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame_State.cpp">
+      <Filter>02. framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Title_State.cpp">
+      <Filter>02. framework</Filter>
+    </ClCompile>
+    <ClCompile Include="cross_rabits.cpp">
+      <Filter>02. framework</Filter>
+    </ClCompile>
+    <ClCompile Include="MyHero.cpp">
+      <Filter>03. hero</Filter>
+    </ClCompile>
+    <ClCompile Include="MyState.cpp">
+      <Filter>04. State</Filter>
+    </ClCompile>
+    <ClCompile Include="Mycommon.cpp">
+      <Filter>05. Common</Filter>
+    </ClCompile>
+    <ClCompile Include="MyTree.cpp">
+      <Filter>05. Common</Filter>
+    </ClCompile>
+    <ClCompile Include="MyRoad.cpp">
+      <Filter>06. Road</Filter>
+    </ClCompile>
+    <ClCompile Include="MyTruck.cpp">
+      <Filter>06. Road</Filter>
+    </ClCompile>
+    <ClCompile Include="MyRiver.cpp">
+      <Filter>07. River</Filter>
+    </ClCompile>
+    <ClCompile Include="MyLog.cpp">
+      <Filter>07. River</Filter>
+    </ClCompile>
+    <ClCompile Include="MyTrail.cpp">
+      <Filter>08. Trail</Filter>
+    </ClCompile>
+    <ClCompile Include="MyTrain.cpp">
+      <Filter>08. Trail</Filter>
+    </ClCompile>
+    <ClCompile Include="firework.cpp">
+      <Filter>09.fire</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
