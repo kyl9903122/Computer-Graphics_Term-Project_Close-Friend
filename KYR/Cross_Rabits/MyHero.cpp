@@ -49,12 +49,6 @@ bool kyrHero::check_collision(MyPos obs_pos, int obs_tag) {
 		obs_pos.x - 400,-25.0f,-25.0f
 		};
 	}
-	if (obs_tag == 1) {
-		obs_bounding_box = {
-		obs_pos.x + 23,25.0f,25.0f,
-		obs_pos.x - 23,-25.0f,-25.0f
-		};
-	}
 	std::cout << "hero.x: " << current_pos.x << std::endl;
 	std::cout << "obs.x: " << obs_pos.x << std::endl;
 	// change my_bounding_box
@@ -106,7 +100,8 @@ void kyrHero::draw(glm::mat4 projection, glm::mat4 view, Shader shader) {
 
 bool kyrHero::check_death(MyPos obs_pos,int obs_tag) {
 	std::cout << "check death" << std::endl;
-	if (current_pos.z > 545) {
+	MyPos hero_view_pos = { current_pos.x * cos(glm::radians(10.0f)) - current_pos.z * sin(glm::radians(10.0f)),0.0f,current_pos.x*sin(glm::radians(10.0f)) + current_pos.z*cos(glm::radians(10.0f)) };
+	if (hero_view_pos.z > 550 || hero_view_pos.x < -400 || hero_view_pos.x > 400) {
 		soul_moving = true;
 	}
 	// case 1. collision with obstacles

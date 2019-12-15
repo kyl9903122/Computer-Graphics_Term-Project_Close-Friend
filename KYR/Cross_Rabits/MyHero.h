@@ -1,7 +1,7 @@
 #pragma once
 #include "loadObj.h"
 #include "MyHeader.h"
-#include <vector>
+#include <math.h>
 
 struct MyCollisionData {
 	MyPos pos;
