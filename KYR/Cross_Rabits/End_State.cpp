@@ -20,8 +20,8 @@ void End_State::Display() {
 	shader1->setVec3("obj_color", glm::vec3(1.0, 1.0, 0.0));
 	draw_score(400, cur_score);
 	draw_score(200, best_score);
-	draw_score(100, mid_score);
-	draw_score(0.0f, last_score);
+	draw_score(80, mid_score);
+	draw_score(-40, last_score);
 }
 
 void End_State::update() {
@@ -38,6 +38,11 @@ void End_State::update() {
 			mid_score = *(++iter);
 			last_score = *(++iter);
 
+		}
+		else if (mid_score == cur_score) {
+			mid_score = *(++iter);
+			++iter;
+			last_score = *(++iter);
 		}
 		else {
 			mid_score = *(++iter);

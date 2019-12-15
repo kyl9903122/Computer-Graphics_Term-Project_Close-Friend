@@ -66,7 +66,7 @@ MyRoad::MyRoad() {
  }
 
  void MyRoad::CreateTruck(int idx) {
-	 trucks[idx] = new MyTruck(pos);
+	 trucks[idx] = new MyTruck(pos, speed);
  }
 
  void MyRoad::remove_truck(int i) {
@@ -75,7 +75,7 @@ MyRoad::MyRoad() {
 	 std::cout << "삭제 : "<< pos.z << std::endl;
 	 // 2. create
 	 if (pos.z <= 600) {
-		 trucks[i] = new MyTruck(pos);
+		 trucks[i] = new MyTruck(pos, speed);
 		 std::cout <<"생성: "<< pos.z << std::endl;
 	}
  }

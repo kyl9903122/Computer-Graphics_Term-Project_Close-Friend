@@ -134,6 +134,7 @@ void MainGame_State::hero_update() {
 				hero.log_speed = states[cur_state_idx]->get_obs_speed(i);
 				break;
 			}
+			hero.on_the_log = false;
 		}
 	}
 	hero.update(cur_state_tag, cur_state_obs_pos, cur_state_obs_cnt);

@@ -95,7 +95,7 @@ void MyTrail::train_warning_light(glm::mat4 projection, glm::mat4 view)
 	glm::vec3 lightColor = glm::vec3(1.0f);
 
 	transMatrix = glm::translate(transMatrix, glm::vec3(0.0f, 0.0f, pos.z));
-	scaleMatix = glm::scale(scaleMatix, glm::vec3(10.0f, 10.0f, 10.0f));
+	scaleMatix = glm::scale(scaleMatix, glm::vec3(20.0f, 21.0f, 20.0f));
 
 	myTransformeVector = transMatrix * scaleMatix;
 	lightbox.setTransform(myTransformeVector);

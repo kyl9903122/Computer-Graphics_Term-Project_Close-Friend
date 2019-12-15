@@ -36,7 +36,7 @@ void kyrHero::move() {
 	}
 }
 
-bool kyrHero::check_collision(MyPos obs_pos,int obs_tag) {
+bool kyrHero::check_collision(MyPos obs_pos, int obs_tag) {
 	// make obs_bounding_box
 	MyBoundingBox obs_bounding_box = {
 		obs_pos.x + 20,25.0f,25.0f,
@@ -44,9 +44,15 @@ bool kyrHero::check_collision(MyPos obs_pos,int obs_tag) {
 	};
 	std::cout << "obs_tag: " << obs_tag << std::endl;
 	if (obs_tag == 3) {
-			obs_bounding_box = {
-			obs_pos.x + 400,25.0f,25.0f,
-			obs_pos.x - 400,-25.0f,-25.0f
+		obs_bounding_box = {
+		obs_pos.x + 400,25.0f,25.0f,
+		obs_pos.x - 400,-25.0f,-25.0f
+		};
+	}
+	if (obs_tag == 1) {
+		obs_bounding_box = {
+		obs_pos.x + 23,25.0f,25.0f,
+		obs_pos.x - 23,-25.0f,-25.0f
 		};
 	}
 	std::cout << "hero.x: " << current_pos.x << std::endl;
@@ -108,7 +114,7 @@ bool kyrHero::check_death(MyPos obs_pos,int obs_tag) {
 		// obstacle is log
 		if (check_collision(obs_pos,obs_tag)) {
 			// hero is on the log
-			current_pos.y = obs_pos.y + 20+size/2;
+			current_pos.y = obs_pos.y +size/2;
 			// hero has to stop jumping
 			arrive_at_floor = true;
 			moving = false;
@@ -118,7 +124,7 @@ bool kyrHero::check_death(MyPos obs_pos,int obs_tag) {
 		}
 		else {
 			// hero falls into the river
-			if (current_pos.y < obs_pos.y + 20 + size / 2) {
+			if (current_pos.y < obs_pos.y + size / 2 - 2) {
 				fall_into_river = true;
 				std::cout << "fall into the river" << std::endl;
 				current_pos.y -= 5;
