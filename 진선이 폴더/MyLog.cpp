@@ -1,9 +1,9 @@
 #include "MyLog.h"
 
-MyLog::MyLog(MyPos road_pos) {
+MyLog::MyLog(MyPos road_pos, float speed_state) {
 	// pos init
-	pos = { road_pos.x - 600.0f, road_pos.y, road_pos.z };
-	speed = rand() % 25 + 5;
+	pos = { road_pos.x - 500 - (rand() % 7)* 110, road_pos.y, road_pos.z };
+	speed = speed_state;
 	size = 50.0f;
 	direction = 1;
 }

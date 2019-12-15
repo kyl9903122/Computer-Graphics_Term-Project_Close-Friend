@@ -11,7 +11,7 @@ public:
 	float direction;
 public:
 	MyPos pos;
-	MyTruck(MyPos road_pos);
+	MyTruck(MyPos road_pos, float speed);
 	void draw(glm::mat4 projection, glm::mat4 view, glm::mat4 model, Shader shader);
 	void move(MyPos road_pos);
 	bool check_removing();

@@ -70,7 +70,7 @@ bool MyRiver::check_removing() {
 }
 
 void MyRiver::CreateLog(int idx) {
-	logs[idx] = new MyLog(pos);
+	logs[idx] = new MyLog(pos, speed);
 }
 
 void MyRiver::remove_log(int i) {
@@ -79,7 +79,7 @@ void MyRiver::remove_log(int i) {
 
 	// 2. create
 	if (pos.z <= 600)
-		logs[i] = new MyLog(pos);
+		logs[i] = new MyLog(pos, speed);
 }
 
 MyRiver::~MyRiver() {};

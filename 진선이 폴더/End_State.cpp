@@ -5,23 +5,23 @@ End_State::End_State() {
 	int num;
 	while (!in.eof()) {
 		in >> num;
-		std::cout << num << std::endl;
 		rank.push_back(num);
 	}
 	in.close();
+	std::cout << "complete Creating End_State" << std::endl;
 }
 
 End_State::~End_State() {
-	
+
 }
 
 void End_State::Display() {
 	shader1->use();
 	shader1->setVec3("obj_color", glm::vec3(1.0, 1.0, 0.0));
-	draw_score(400,cur_score);
+	draw_score(400, cur_score);
 	draw_score(200, best_score);
-	draw_score(100, mid_score);
-	draw_score(0.0f, last_score);
+	draw_score(80, mid_score);
+	draw_score(-40, last_score);
 }
 
 void End_State::update() {
@@ -38,6 +38,11 @@ void End_State::update() {
 			mid_score = *(++iter);
 			last_score = *(++iter);
 
+		}
+		else if (mid_score == cur_score) {
+			mid_score = *(++iter);
+			++iter;
+			last_score = *(++iter);
 		}
 		else {
 			mid_score = *(++iter);
@@ -56,7 +61,7 @@ void End_State::keyboard(unsigned char key, int x, int y) {
 }
 
 void End_State::draw_score(float y_pos, int score) {
-	
+
 	num[2] = score / 100;
 	num[1] = (score - num[2] * 100) / 10;
 	num[0] = score - num[2] * 100 - num[1] * 10;
@@ -65,13 +70,15 @@ void End_State::draw_score(float y_pos, int score) {
 	second_number(y_pos);
 	third_number(y_pos);
 
-	std::cout << num[2] << std::endl <<num[1] << std::endl <<num[0] << std::endl << std::endl;
+	std::cout << num[2] << std::endl << num[1] << std::endl << num[0] << std::endl << std::endl;
 }
 
 void End_State::first_number(float y_pos)
 {
+	std::cout << "first_num" << std::endl;
 	loadOBJ* first = nullptr;
 	shader1->use();
+	std::cout << "id: " << shader1->ID << std::endl;
 
 	switch (num[2]) {
 	case 0:
@@ -119,6 +126,7 @@ void End_State::first_number(float y_pos)
 		first->load(projection, view);
 		break;
 	}
+
 
 	glm::mat4 model = glm::mat4(1.0f);
 	glm::mat4 translation = glm::mat4(1.0f);

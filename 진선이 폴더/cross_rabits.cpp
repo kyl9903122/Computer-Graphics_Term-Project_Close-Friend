@@ -39,7 +39,7 @@ int main(int argc, char** argv)
 	delete title.shader;
 }
 
-GLvoid drawScene() 
+GLvoid drawScene()
 {
 	std::cout << "draw" << std::endl;
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
@@ -85,12 +85,13 @@ GLvoid TimerFunction(int value)
 		main_game->update();
 		state_mode = main_game->next_state;
 		if (state_mode != 1) {
-			std :: cout << state_mode << std::endl;
+			std::cout << state_mode << std::endl;
 			delete main_game->shader;
 			delete main_game->hero_shader;
 			delete main_game;
 			end = new End_State;
 			end->shader1 = new Shader("number_vertexshader.glvs", "number_fragmentshader.glfs");
+			std::cout << end->shader1->ID << " id" << std::endl;
 		}
 		break;
 	case 2:
@@ -110,14 +111,14 @@ GLvoid keyboard(unsigned char key, int x, int y) {
 			main_game = new MainGame_State;
 			main_game->shader = new Shader("vertexshader.glvs", "fragmentshader.glfs");
 			main_game->hero_shader = new Shader("hero_vertexshader.glvs", "hero_fragmentshader.glfs");
-	}
+		}
 		break;
 	case 1:
 		main_game->keyboard(key, x, y);
 		break;
 	case 2:
 		end->keyboard(key, x, y);
-		state_mode = title.next_state;
+		state_mode = end->next_state;
 		delete end->shader1;
 		delete end;
 		break;

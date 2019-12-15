@@ -1,12 +1,12 @@
 #include "MyTruck.h"
 
-MyTruck::MyTruck(MyPos road_pos) {
+MyTruck::MyTruck(MyPos road_pos, float state_speed) {
 	// pos init
-	pos = { road_pos.x-600.0f,road_pos.y,road_pos.z };
-	speed = rand() % 20 + 5;
+	pos = { road_pos.x - 500 - (rand() % 8) * 110,road_pos.y,road_pos.z };
+	speed = state_speed;
 	size = 50.0f; 
 	direction = 1;
-	if (speed < 10)
+	if (speed < 20)
 		obj_path = "truck.obj";
 	else
 		obj_path = "car.obj";
