@@ -71,7 +71,8 @@ void MainGame_State::update() {
 }
 
 void MainGame_State::keyboard(unsigned char key, int x, int y) {
-	if (!hero.soul_moving && !hero.moving) {
+	if (!hero.soul_moving && !hero.moving && !hero.fall_into_river) {
+		PlaySound(TEXT("./jump2.wav"), NULL, SND_FILENAME | SND_NODEFAULT | SND_ASYNC);
 		switch (key) {
 		case 'w':
 		case 'W':
