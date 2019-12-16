@@ -7,9 +7,14 @@ void Title_State::Display() {
 	shader->setVec3("viewPos", glm::vec3(0.0f, 45.0f, 50));
 	shader->setVec3("lightColor", glm::vec3(0.5f, 0.5f, 0.5f));
 	shader->setVec3("lightPos", glm::vec3(0, 800, 2000));
-	shader->setVec3("obj_color", glm::vec3(1.0,0.6,0.0));
-	draw_font();
 	draw_rabit();
+
+	font_shader->use();
+	font_shader->setVec3("viewPos", glm::vec3(0.0f, 45.0f, 50));
+	font_shader->setVec3("lightColor", glm::vec3(0.5f, 0.5f, 0.5f));
+	font_shader->setVec3("lightPos", glm::vec3(0, 800, 2000));
+	font_shader->setVec3("obj_color", glm::vec3(1.0, 0.6, 0.0));
+	draw_font();
 
 	for (int i = 0; i < 4; i++)
 		firework_particle[i].draw();

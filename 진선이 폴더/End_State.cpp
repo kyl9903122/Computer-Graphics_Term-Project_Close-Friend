@@ -8,7 +8,6 @@ End_State::End_State() {
 		rank.push_back(num);
 	}
 	in.close();
-	std::cout << "complete Creating End_State" << std::endl;
 }
 
 End_State::~End_State() {
@@ -69,16 +68,12 @@ void End_State::draw_score(float y_pos, int score) {
 	first_number(y_pos);
 	second_number(y_pos);
 	third_number(y_pos);
-
-	std::cout << num[2] << std::endl << num[1] << std::endl << num[0] << std::endl << std::endl;
 }
 
 void End_State::first_number(float y_pos)
 {
-	std::cout << "first_num" << std::endl;
 	loadOBJ* first = nullptr;
 	shader1->use();
-	std::cout << "id: " << shader1->ID << std::endl;
 
 	switch (num[2]) {
 	case 0:

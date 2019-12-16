@@ -28,8 +28,8 @@ int main(int argc, char** argv)
 	}
 	else
 		std::cout << "GLEW Initialized" << std::endl;
-	title.shader = new Shader("font_vertexshader.glvs", "font_fragmentshader.glfs");
-
+	title.shader = new Shader("hero_vertexshader.glvs", "hero_fragmentshader.glfs");
+	title.font_shader = new Shader("font_vertexshader.glvs", "font_fragmentshader.glfs");
 	glutDisplayFunc(drawScene);
 	glutTimerFunc(10, TimerFunction, 1);
 	glutKeyboardFunc(keyboard);
@@ -37,11 +37,11 @@ int main(int argc, char** argv)
 	glutMainLoop();
 
 	delete title.shader;
+	delete title.font_shader;
 }
 
 GLvoid drawScene()
 {
-	std::cout << "draw" << std::endl;
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	switch (state_mode) {
@@ -85,13 +85,11 @@ GLvoid TimerFunction(int value)
 		main_game->update();
 		state_mode = main_game->next_state;
 		if (state_mode != 1) {
-			std::cout << state_mode << std::endl;
 			delete main_game->shader;
 			delete main_game->hero_shader;
 			delete main_game;
 			end = new End_State;
 			end->shader1 = new Shader("number_vertexshader.glvs", "number_fragmentshader.glfs");
-			std::cout << end->shader1->ID << " id" << std::endl;
 		}
 		break;
 	case 2:
