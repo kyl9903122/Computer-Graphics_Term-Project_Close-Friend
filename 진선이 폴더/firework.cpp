@@ -2,9 +2,9 @@
 
 firework::firework()
 {
-	color_random1 = rand() % 1000 * 0.001;
-	color_random2 = rand() % 1000 * 0.001;
-	color_random3 = rand() % 1000 * 0.001;
+	color_random1 = (rand() % 500 + 500) * 0.001;
+	color_random2 = (rand() % 500 + 500) * 0.001;
+	color_random3 = (rand() % 500 + 500) * 0.001;
 	float X_pos = rand() % 800 - 400;
 	float Y_pos = rand() % 800 - 400;
 	float timer_rand = rand() % 10 + 5;
@@ -29,9 +29,9 @@ void firework::draw() {
 		snow_obj[i] = loadOBJ("snow.obj", snowShader.ID);
 
 		if (snow[i].timer < 0) {
-			color_random1 = rand() % 1000 * 0.001;
-			color_random2 = rand() % 1000 * 0.001;
-			color_random3 = rand() % 1000 * 0.001;
+			color_random1 = (rand() % 500+ 500) * 0.001;
+			color_random2 = (rand() % 500 + 500) * 0.001;
+			color_random3 = (rand() % 500 + 500) * 0.001;
 			float X_pos = rand() % 800 - 400;
 			float Y_pos = rand() % 800 - 400;
 			float timer_rand = rand() % 10 + 5;
@@ -75,7 +75,7 @@ void firework::draw() {
 
 
 		transMatrix = glm::translate(transMatrix, glm::vec3(snow[i].X, snow[i].Y, snow[i].Z));
-		scaleMatix = glm::scale(scaleMatix, glm::vec3(10.0f, 10.0f, 10.0f));
+		scaleMatix = glm::scale(scaleMatix, glm::vec3(5.0f, 5.0f, 5.0f));
 
 		myTransformeVector = transMatrix * scaleMatix;
 

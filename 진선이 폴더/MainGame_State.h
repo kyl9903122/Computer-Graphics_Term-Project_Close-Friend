@@ -44,7 +44,7 @@ public:
 	int cur_state_idx = 0;
 	int pass_state_cnt = 0;
 
-
+	bool back_music = true;
 public:
 	MainGame_State();
 	~MainGame_State();

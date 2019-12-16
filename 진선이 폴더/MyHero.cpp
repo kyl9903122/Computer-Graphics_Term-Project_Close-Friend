@@ -25,6 +25,7 @@ void kyrHero::move() {
 		// hero is jumping
 		jumping_velocity -= 10;
 		current_pos.y += jumping_velocity;
+		//test
 		if (current_pos.y <= 0.0f) {
 			// hero fell to the floor
 			// we have to init 'jumping values'
@@ -36,27 +37,23 @@ void kyrHero::move() {
 	}
 }
 
-bool kyrHero::check_collision(MyPos obs_pos,int obs_tag) {
+bool kyrHero::check_collision(MyPos obs_pos, int obs_tag) {
 	// make obs_bounding_box
 	MyBoundingBox obs_bounding_box = {
-		obs_pos.x + 20,25.0f,25.0f,
-		obs_pos.x - 20,-25.0f,-25.0f
+		obs_pos.x + 20,20.0f,25.0f,
+		obs_pos.x - 20,-20.0f,-25.0f
 	};
-	std::cout << "obs_tag: " << obs_tag << std::endl;
 	if (obs_tag == 3) {
-			obs_bounding_box = {
-			obs_pos.x + 400,25.0f,25.0f,
-			obs_pos.x - 400,-25.0f,-25.0f
+		obs_bounding_box = {
+		obs_pos.x + 400,25.0f,25.0f,
+		obs_pos.x - 400,-25.0f,-25.0f
 		};
 	}
-	std::cout << "hero.x: " << current_pos.x << std::endl;
-	std::cout << "obs.x: " << obs_pos.x << std::endl;
 	// change my_bounding_box
 	bounding_box = {
 		current_pos.x + size / 2,current_pos.y + size / 2,current_pos.z + size / 2,
 		current_pos.x - size / 2,current_pos.y - size / 2,current_pos.z - size / 2
 	};
-	std::cout << obs_pos.x << std::endl;
 	// start checking
 	// aabb - aabb collision checking
 	if (bounding_box.right < obs_bounding_box.left)
@@ -69,8 +66,6 @@ bool kyrHero::check_collision(MyPos obs_pos,int obs_tag) {
 		return false;
 	if (bounding_box.bottom > obs_bounding_box.top)
 		return false;
-
-	std::cout << "collide" << std::endl;
 	return true;
 }
 
@@ -99,16 +94,16 @@ void kyrHero::draw(glm::mat4 projection, glm::mat4 view, Shader shader) {
 }
 
 bool kyrHero::check_death(MyPos obs_pos,int obs_tag) {
-	std::cout << "check death" << std::endl;
-	if (current_pos.z > 545) {
+	MyPos hero_view_pos = { current_pos.x * cos(glm::radians(10.0f)) - current_pos.z * sin(glm::radians(10.0f)),0.0f,current_pos.x*sin(glm::radians(10.0f)) + current_pos.z*cos(glm::radians(10.0f)) };
+	if (hero_view_pos.z > 550 || hero_view_pos.x < -400 || hero_view_pos.x > 400) {
 		soul_moving = true;
 	}
 	// case 1. collision with obstacles
 	if (obs_tag == 1) {
 		// obstacle is log
-		if (check_collision(obs_pos,obs_tag)) {
+		if (check_collision(obs_pos,obs_tag)&& current_pos.y - obs_pos.y < 5) {
 			// hero is on the log
-			current_pos.y = obs_pos.y + 20+size/2;
+			current_pos.y = obs_pos.y +size/2;
 			// hero has to stop jumping
 			arrive_at_floor = true;
 			moving = false;
@@ -118,17 +113,15 @@ bool kyrHero::check_death(MyPos obs_pos,int obs_tag) {
 		}
 		else {
 			// hero falls into the river
-			if (current_pos.y < obs_pos.y + 20 + size / 2) {
+			if (current_pos.y < obs_pos.y + size / 2 - 2) {
 				fall_into_river = true;
-				std::cout << "fall into the river" << std::endl;
 				current_pos.y -= 5;
 				moving = false;
 				if (current_pos.y < -50) {
-					std::cout << "soul moving" << std::endl;
 					soul_moving = true;
 					current_pos.y += 5;
+					return true;		
 				}
-				return true;
 			}
 			else
 				return false;
@@ -169,7 +162,6 @@ void kyrHero::update(int tag,MyPos* obs_pos1, int obs_cnt1) {
 	if (!soul_moving) {
 		move();
 		current_pos.x += log_speed;
-		std::cout << "log_speed: " << log_speed << std::endl;
 		for (int i = 0; i < obs_cnt1; ++i) {
 			if (check_death(obs_pos1[i], tag)) {
 

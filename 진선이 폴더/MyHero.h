@@ -1,7 +1,7 @@
 #pragma once
 #include "loadObj.h"
 #include "MyHeader.h"
-#include <vector>
+#include <math.h>
 
 struct MyCollisionData {
 	MyPos pos;
@@ -12,7 +12,7 @@ class kyrHero
 {
 public:
 	// hero's shader_path
-	MyPos current_pos{ 0.0f,0.0f,00.0f };
+	MyPos current_pos{ 0.0f,0.0f,0.0f };
 	float direction_angle = 0.0f;
 	MyBoundingBox bounding_box{ size / 2,size / 2,size / 2,-size / 2,-size / 2,-size / 2 };
 	float size = 40.0f;
@@ -26,7 +26,6 @@ public:
 	float log_speed = 0;
 	bool fall_into_river = false;
 	int* cur_state_idx = nullptr;
-
 public:
 	bool check_collision(MyPos obs_pos,int obs_tag);
 	void move();

@@ -1,4 +1,5 @@
-#pragma once
+#pragma once 
+#include "Sound.h"
 #define SCR_WIDTH 800
 #define SCR_HEIGHT 600
 
