@@ -108,13 +108,14 @@ bool kyrHero::check_death(MyPos obs_pos,int obs_tag) {
 			arrive_at_floor = true;
 			moving = false;
 			on_the_log = true;
+			fall_into_river = false;
 			jumping_velocity = 30.0f;
 			return false;
 		}
 		else {
 			// hero falls into the river
+			if (current_pos.y < obs_pos.y + size / 2) {
 				fall_into_river = true;
-			if (current_pos.y < obs_pos.y + size / 2 - 2) {
 				current_pos.y -= 5;
 				moving = false;
 				if (current_pos.y < -50) {
