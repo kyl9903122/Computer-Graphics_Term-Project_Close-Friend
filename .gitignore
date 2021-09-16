@@ -1,0 +1,17 @@
+/.vs
+/Cross Rabit/x64
+/Cross Rabit/x32
+/Cross Rabit/Debug
+/ipch
+*.exe
+*.ilk
+*.pdb
+*.obj
+*.log
+*.pch
+*.idb
+*.tlog
+*.lastbuildstate
+*.suo
+*.db
+*.ipch
