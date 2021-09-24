@@ -19,43 +19,43 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="scripts\cross_rabits.cpp" />
-    <ClCompile Include="scripts\framework\End_State.cpp" />
-    <ClCompile Include="scripts\framework\MainGame_State.cpp" />
-    <ClCompile Include="scripts\framework\Title_State.cpp" />
-    <ClCompile Include="scripts\library\firework.cpp" />
-    <ClCompile Include="scripts\library\loadOBJ.cpp" />
-    <ClCompile Include="scripts\map\Mycommon.cpp" />
-    <ClCompile Include="scripts\map\MyLog.cpp" />
-    <ClCompile Include="scripts\map\MyObstacles.cpp" />
-    <ClCompile Include="scripts\map\MyRiver.cpp" />
-    <ClCompile Include="scripts\map\MyRoad.cpp" />
-    <ClCompile Include="scripts\map\MyState.cpp" />
-    <ClCompile Include="scripts\map\MyTrail.cpp" />
-    <ClCompile Include="scripts\map\MyTrain.cpp" />
-    <ClCompile Include="scripts\map\MyTree.cpp" />
-    <ClCompile Include="scripts\map\MyTruck.cpp" />
-    <ClCompile Include="scripts\player\MyHero.cpp" />
+    <ClCompile Include="sources\cross_rabits.cpp" />
+    <ClCompile Include="sources\library\firework.cpp" />
+    <ClCompile Include="sources\library\loadOBJ.cpp" />
+    <ClCompile Include="sources\map\Mycommon.cpp" />
+    <ClCompile Include="sources\map\MyLog.cpp" />
+    <ClCompile Include="sources\map\MyObstacles.cpp" />
+    <ClCompile Include="sources\map\MyRiver.cpp" />
+    <ClCompile Include="sources\map\MyRoad.cpp" />
+    <ClCompile Include="sources\map\MyState.cpp" />
+    <ClCompile Include="sources\map\MyTrail.cpp" />
+    <ClCompile Include="sources\map\MyTrain.cpp" />
+    <ClCompile Include="sources\map\MyTree.cpp" />
+    <ClCompile Include="sources\map\MyTruck.cpp" />
+    <ClCompile Include="sources\player\MyHero.cpp" />
+    <ClCompile Include="sources\scenes\End_State.cpp" />
+    <ClCompile Include="sources\scenes\MainGame_State.cpp" />
+    <ClCompile Include="sources\scenes\Title_State.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="scripts\framework\End_State.h" />
-    <ClInclude Include="scripts\framework\MainGame_State.h" />
-    <ClInclude Include="scripts\framework\Title_State.h" />
-    <ClInclude Include="scripts\library\firework_particle.h" />
-    <ClInclude Include="scripts\library\loadObj.h" />
-    <ClInclude Include="scripts\library\MyHeader.h" />
-    <ClInclude Include="scripts\library\shader.h" />
-    <ClInclude Include="scripts\map\MyCommon.h" />
-    <ClInclude Include="scripts\map\MyLog.h" />
-    <ClInclude Include="scripts\map\MyObstacles.h" />
-    <ClInclude Include="scripts\map\MyRiver.h" />
-    <ClInclude Include="scripts\map\MyRoad.h" />
-    <ClInclude Include="scripts\map\MyState.h" />
-    <ClInclude Include="scripts\map\MyTrail.h" />
-    <ClInclude Include="scripts\map\MyTrain.h" />
-    <ClInclude Include="scripts\map\MyTree.h" />
-    <ClInclude Include="scripts\map\MyTruck.h" />
-    <ClInclude Include="scripts\player\MyHero.h" />
+    <ClInclude Include="sources\library\firework_particle.h" />
+    <ClInclude Include="sources\library\loadObj.h" />
+    <ClInclude Include="sources\library\MyHeader.h" />
+    <ClInclude Include="sources\library\shader.h" />
+    <ClInclude Include="sources\map\MyCommon.h" />
+    <ClInclude Include="sources\map\MyLog.h" />
+    <ClInclude Include="sources\map\MyObstacles.h" />
+    <ClInclude Include="sources\map\MyRiver.h" />
+    <ClInclude Include="sources\map\MyRoad.h" />
+    <ClInclude Include="sources\map\MyState.h" />
+    <ClInclude Include="sources\map\MyTrail.h" />
+    <ClInclude Include="sources\map\MyTrain.h" />
+    <ClInclude Include="sources\map\MyTree.h" />
+    <ClInclude Include="sources\map\MyTruck.h" />
+    <ClInclude Include="sources\player\MyHero.h" />
+    <ClInclude Include="sources\scenes\End_State.h" />
+    <ClInclude Include="sources\scenes\MainGame_State.h" />
+    <ClInclude Include="sources\scenes\Title_State.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

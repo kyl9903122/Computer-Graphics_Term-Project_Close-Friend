@@ -1,6 +1,6 @@
-#include"framework/MainGame_State.h"
-#include "framework/Title_State.h"
-#include "framework/End_State.h"
+#include "scenes/MainGame_State.h"
+#include "scenes/Title_State.h"
+#include "scenes/End_State.h"
 
 Title_State title;
 MainGame_State* main_game = nullptr;

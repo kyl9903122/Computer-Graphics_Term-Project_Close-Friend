@@ -18,7 +18,7 @@ firework::firework()
 }
 
 void firework::draw() {
-	Shader snowShader("snowvertex.glvs", "snowfragment.glfs");
+	Shader snowShader("../Cross Rabit/shaders/snowvertex.glvs", "../Cross Rabit/shaders/snowfragment.glfs");
 
 	loadOBJ snow_obj[50];
 	// you can name your shader files however you like
