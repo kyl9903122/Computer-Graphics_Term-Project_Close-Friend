@@ -5,7 +5,7 @@ class MyTree
 {
 public:
 	MyPos pos;
-	const char* obj_path = "tree.obj";
+	const char* obj_path = "../Cross Rabit/resources/models/tree.obj";
 	float size;
 public:
 	MyTree(MyPos road_pos);

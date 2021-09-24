@@ -70,7 +70,7 @@ bool kyrHero::check_collision(MyPos obs_pos, int obs_tag) {
 }
 
 void kyrHero::draw(glm::mat4 projection, glm::mat4 view, Shader shader) {
-	loadOBJ obj("rabit.obj", shader.ID);
+	loadOBJ obj("../Cross Rabit/resources/models/rabit.obj", shader.ID);
 	shader.use();
 	obj.load(projection, view);
 	// init model_matrix
@@ -181,7 +181,7 @@ void kyrHero::soul_move() {
 
 void kyrHero::soul_draw(glm::mat4 projection, glm::mat4 view, Shader shader) {
 	if (soul_moving){
-		loadOBJ soul_obj("ghost.obj", shader.ID);
+		loadOBJ soul_obj("../Cross Rabit/resources/models/ghost.obj", shader.ID);
 		soul_obj.load(projection, view);
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(soul_pos.x+current_pos.x, soul_pos.y+current_pos.y, current_pos.z));

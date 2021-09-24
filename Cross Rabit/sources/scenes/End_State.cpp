@@ -77,47 +77,47 @@ void End_State::first_number(float y_pos)
 
 	switch (num[2]) {
 	case 0:
-		first = new loadOBJ("number_0.obj", shader1->ID);
+		first = new loadOBJ("../Cross Rabit/resources/models/number_0.obj", shader1->ID);
 		first->load(projection, view);
 		break;
 	case 1:
-		first = new loadOBJ("number_1.obj", shader1->ID);
+		first = new loadOBJ("../Cross Rabit/resources/models/number_1.obj", shader1->ID);
 		first->load(projection, view);
 		break;
 	case 2:
-		first = new loadOBJ("number_2.obj", shader1->ID);
+		first = new loadOBJ("../Cross Rabit/resources/models/number_2.obj", shader1->ID);
 		first->load(projection, view);
 		break;
 	case 3:
-		first = new loadOBJ("number_3.obj", shader1->ID);
+		first = new loadOBJ("../Cross Rabit/resources/models/number_3.obj", shader1->ID);
 		first->load(projection, view);
 		break;
 	case 4:
-		first = new loadOBJ("number_4.obj", shader1->ID);
+		first = new loadOBJ("../Cross Rabit/resources/models/number_4.obj", shader1->ID);
 		first->load(projection, view);
 		break;
 	case 5:
-		first = new loadOBJ("number_5.obj", shader1->ID);
+		first = new loadOBJ("../Cross Rabit/resources/models/number_5.obj", shader1->ID);
 		first->load(projection, view);
 		break;
 	case 6:
-		first = new loadOBJ("number_6.obj", shader1->ID);
+		first = new loadOBJ("../Cross Rabit/resources/models/number_6.obj", shader1->ID);
 		first->load(projection, view);
 		break;
 	case 7:
-		first = new loadOBJ("number_7.obj", shader1->ID);
+		first = new loadOBJ("../Cross Rabit/resources/models/number_7.obj", shader1->ID);
 		first->load(projection, view);
 		break;
 	case 8:
-		first = new loadOBJ("number_8.obj", shader1->ID);
+		first = new loadOBJ("../Cross Rabit/resources/models/number_8.obj", shader1->ID);
 		first->load(projection, view);
 		break;
 	case 9:
-		first = new loadOBJ("number_9.obj", shader1->ID);
+		first = new loadOBJ("../Cross Rabit/resources/models/number_9.obj", shader1->ID);
 		first->load(projection, view);
 		break;
 	default:
-		first = new loadOBJ("number_0.obj", shader1->ID);
+		first = new loadOBJ("../Cross Rabit/resources/models/number_0.obj", shader1->ID);
 		first->load(projection, view);
 		break;
 	}
@@ -143,43 +143,43 @@ void End_State::second_number(float y_pos)
 
 	switch (num[1]) {
 	case 0:
-		second = new loadOBJ("number_0.obj", shader1->ID);
+		second = new loadOBJ("../Cross Rabit/resources/models/number_0.obj", shader1->ID);
 		second->load(projection, view);
 		break;
 	case 1:
-		second = new loadOBJ("number_1.obj", shader1->ID);
+		second = new loadOBJ("../Cross Rabit/resources/models/number_1.obj", shader1->ID);
 		second->load(projection, view);
 		break;
 	case 2:
-		second = new loadOBJ("number_2.obj", shader1->ID);
+		second = new loadOBJ("../Cross Rabit/resources/models/number_2.obj", shader1->ID);
 		second->load(projection, view);
 		break;
 	case 3:
-		second = new loadOBJ("number_3.obj", shader1->ID);
+		second = new loadOBJ("../Cross Rabit/resources/models/number_3.obj", shader1->ID);
 		second->load(projection, view);
 		break;
 	case 4:
-		second = new loadOBJ("number_4.obj", shader1->ID);
+		second = new loadOBJ("../Cross Rabit/resources/models/number_4.obj", shader1->ID);
 		second->load(projection, view);
 		break;
 	case 5:
-		second = new loadOBJ("number_5.obj", shader1->ID);
+		second = new loadOBJ("../Cross Rabit/resources/models/number_5.obj", shader1->ID);
 		second->load(projection, view);
 		break;
 	case 6:
-		second = new loadOBJ("number_6.obj", shader1->ID);
+		second = new loadOBJ("../Cross Rabit/resources/models/number_6.obj", shader1->ID);
 		second->load(projection, view);
 		break;
 	case 7:
-		second = new loadOBJ("number_7.obj", shader1->ID);
+		second = new loadOBJ("../Cross Rabit/resources/models/number_7.obj", shader1->ID);
 		second->load(projection, view);
 		break;
 	case 8:
-		second = new loadOBJ("number_8.obj", shader1->ID);
+		second = new loadOBJ("../Cross Rabit/resources/models/number_8.obj", shader1->ID);
 		second->load(projection, view);
 		break;
 	case 9:
-		second = new loadOBJ("number_9.obj", shader1->ID);
+		second = new loadOBJ("../Cross Rabit/resources/models/number_9.obj", shader1->ID);
 		second->load(projection, view);
 		break;
 	}
@@ -206,43 +206,43 @@ void End_State::third_number(float y_pos)
 
 	switch (num[0]) {
 	case 0:
-		third = new loadOBJ("number_0.obj", shader1->ID);
+		third = new loadOBJ("../Cross Rabit/resources/models/number_0.obj", shader1->ID);
 		third->load(projection, view);
 		break;
 	case 1:
-		third = new loadOBJ("number_1.obj", shader1->ID);
+		third = new loadOBJ("../Cross Rabit/resources/models/number_1.obj", shader1->ID);
 		third->load(projection, view);
 		break;
 	case 2:
-		third = new loadOBJ("number_2.obj", shader1->ID);
+		third = new loadOBJ("../Cross Rabit/resources/models/number_2.obj", shader1->ID);
 		third->load(projection, view);
 		break;
 	case 3:
-		third = new loadOBJ("number_3.obj", shader1->ID);
+		third = new loadOBJ("../Cross Rabit/resources/models/number_3.obj", shader1->ID);
 		third->load(projection, view);
 		break;
 	case 4:
-		third = new loadOBJ("number_4.obj", shader1->ID);
+		third = new loadOBJ("../Cross Rabit/resources/models/number_4.obj", shader1->ID);
 		third->load(projection, view);
 		break;
 	case 5:
-		third = new loadOBJ("number_5.obj", shader1->ID);
+		third = new loadOBJ("../Cross Rabit/resources/models/number_5.obj", shader1->ID);
 		third->load(projection, view);
 		break;
 	case 6:
-		third = new loadOBJ("number_6.obj", shader1->ID);
+		third = new loadOBJ("../Cross Rabit/resources/models/number_6.obj", shader1->ID);
 		third->load(projection, view);
 		break;
 	case 7:
-		third = new loadOBJ("number_7.obj", shader1->ID);
+		third = new loadOBJ("../Cross Rabit/resources/models/number_7.obj", shader1->ID);
 		third->load(projection, view);
 		break;
 	case 8:
-		third = new loadOBJ("number_8.obj", shader1->ID);
+		third = new loadOBJ("../Cross Rabit/resources/models/number_8.obj", shader1->ID);
 		third->load(projection, view);
 		break;
 	case 9:
-		third = new loadOBJ("number_9.obj", shader1->ID);
+		third = new loadOBJ("../Cross Rabit/resources/models/number_9.obj", shader1->ID);
 		third->load(projection, view);
 		break;
 	}

@@ -5,7 +5,7 @@ class MyTrail : public MyState
 {
 private:
 	MyTrain* trains[1];
-	const char* obj_path = "trail.obj";
+	const char* obj_path = "../Cross Rabit/resources/models/trail.obj";
 
 public:
 	MyTrail();

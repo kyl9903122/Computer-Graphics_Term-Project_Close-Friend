@@ -6,7 +6,7 @@ class MyLog
 {
 public:
 	MyPos pos;
-	const char* obj_path = "log.obj";
+	const char* obj_path = "../Cross Rabit/resources/models/log.obj";
 	float speed;
 	float size;
 	float direction;

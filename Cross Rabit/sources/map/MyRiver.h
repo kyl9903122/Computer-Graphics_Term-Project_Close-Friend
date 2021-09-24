@@ -5,7 +5,7 @@ class MyRiver : public MyState
 {
 private:
 	MyLog* logs[3];
-	const char* obj_path = "river.obj";
+	const char* obj_path = "../Cross Rabit/resources/models/river.obj";
 	float speed = rand() % 20 + 10;
 public:
 	MyRiver();

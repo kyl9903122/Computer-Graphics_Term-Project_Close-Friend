@@ -7,9 +7,9 @@ MyTruck::MyTruck(MyPos road_pos, float state_speed) {
 	size = 50.0f; 
 	direction = 1;
 	if (speed < 20)
-		obj_path = "truck.obj";
+		obj_path = "../Cross Rabit/resources/models/truck.obj";
 	else
-		obj_path = "car.obj";
+		obj_path = "../Cross Rabit/resources/models/car.obj";
 }
 
 void MyTruck::draw(glm::mat4 projection, glm::mat4 view, glm::mat4 model, Shader shader) {

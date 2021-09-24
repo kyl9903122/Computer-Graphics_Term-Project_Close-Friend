@@ -2,6 +2,7 @@
 /Cross Rabit/x64
 /Cross Rabit/x32
 /Cross Rabit/Debug
+/Cross Rabit/Release
 /ipch
 *.exe
 *.ilk
@@ -18,3 +19,6 @@
 *.db-shm
 *.db-wal
 *.opendb
+*.ipdb
+*.iobj
+Cross Rabit/rank.txt

@@ -101,6 +101,7 @@ void MainGame_State::keyboard(unsigned char key, int x, int y) {
 }
 
 void MainGame_State::init_map() {
+	std::cout << "[Log] Main Game : Create Init Map" << std::endl;
 	states[0] = new MyCommon;
 	if (fabs(states[0]->collision_pos[0].x - hero.current_pos.x) < 50) {
 		hero.current_pos.x += 50;
@@ -133,6 +134,7 @@ void MainGame_State::init_map() {
 		}
 		states[i]->pos.z = i * -50;
 	}
+	std::cout << "[Log] Main Game : Complete Init Map" << std::endl;
 }
 
 void MainGame_State::hero_update() {

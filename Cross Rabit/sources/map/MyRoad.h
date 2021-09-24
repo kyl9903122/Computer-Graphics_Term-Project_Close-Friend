@@ -5,7 +5,7 @@ class MyRoad : public MyState
 {
 private:
 	MyTruck* trucks[2];
-	const char* obj_path = "road.obj";
+	const char* obj_path = "../Cross Rabit/resources/models/road.obj";
 	float speed = rand() % 18 + 10;
 public:
 	MyRoad();

@@ -5,7 +5,7 @@ class MyCommon : public MyState
 {
 private:
 	MyTree* trees[3];
-	const char* obj_path = "common.obj";
+	const char* obj_path = "../Cross Rabit/resources/models/common.obj";
 
 public:
 	MyCommon();

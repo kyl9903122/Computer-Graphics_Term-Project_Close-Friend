@@ -80,11 +80,11 @@ void MyTrail::remove_train(int i) {
 
 void MyTrail::train_warning_light(glm::mat4 projection, glm::mat4 view)
 {
-	Shader light("trainwarningvertex.glvs", "trainwarningfragment.glfs"); // you can name your shader files however you like
+	Shader light("../Cross Rabit/shaders/trainwarningvertex.glvs", "../Cross Rabit/shaders/trainwarningfragment.glfs"); // you can name your shader files however you like
 
 	light.use();
 
-	loadOBJ lightbox("box.obj", light.ID);
+	loadOBJ lightbox("../Cross Rabit/resources/models/box.obj", light.ID);
 
 	lightbox.load(projection, view);
 

@@ -5,7 +5,7 @@
 class MyTrain
 {
 public:
-	const char* obj_path = "train.obj";
+	const char* obj_path = "../Cross Rabit/resources/models/train.obj";
 	MyPos pos;
 	float speed;
 	float size;
