@@ -34,7 +34,7 @@ void Title_State::keyboard(unsigned char key, int x, int y) {
 }
 
 void Title_State::draw_font() {	
-	loadOBJ font("../Cross Rabit/resources/models/title_font.obj", shader->ID);
+	loadOBJ font("../Cross Rabit/resources/models/title_font.obj", font_shader->ID);
 	font.load(projection, view);
 	glm::mat4 model = glm::mat4(1.0f);
 	glm::mat4 translation = glm::mat4(1.0f);
